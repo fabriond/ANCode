@@ -13,8 +13,8 @@ public class Analisador {
 	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
 	private Token nextToken;
-	private String currentLineContent;
-	private int currentLine = 0, currentColumn = 0;
+	private String currentLineContent, line;
+	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
 		
@@ -52,7 +52,139 @@ public class Analisador {
 		}
 		return false;
 	}
-	
+
+	public Token nextToken(){
+		Token token;
+		char current;
+		String tokenValue = "";
+
+		current = line.charAt(currentColumn);
+		while(current == ' ' || current == '\t'){
+			current = nextCharacter();
+			tokenCol++;
+		}
+
+		if(Character.toString(current).matches("\\d")){
+			tokenValue += current;
+			current = nextCharacter();
+			while(Character.toString(current).matches("\\d")){
+				tokenValue += current;
+				current = nextCharacter();
+			}
+			if(current == '.'){
+				tokenValue += current;
+				current = nextCharacter();
+				while(Character.toString(current).matches("\\d")){
+					tokenValue += current;
+					current = nextCharacter();
+				}
+			}
+			if(current != ' '){
+				while(!LexemeTable.separadores.containsKey(current)){
+					tokenValue += current;
+					current = nextCharacter();
+					if(current == '\n') break;
+				}
+			}
+		} else {
+			while(!LexemeTable.separadores.containsKey(current)){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == '\n') break;
+			}
+		}
+
+		if(tokenValue == ""){
+			if(current == '"'){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == '"'){
+					tokenValue += current;
+					currentColumn++;
+				} else {
+					while(current != '\n'){
+						tokenValue += current;
+						current = nextCharacter();
+						if(current == '"'){
+							tokenValue += current;
+							currentColumn++;
+							break;
+						}
+					}
+				}
+			} else if(current == '/'){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == ';'){
+					tokenValue += current;
+					currentLine++;
+					currentColumn = 0;
+				}
+			} else if(current == ';'){
+				tokenValue += current;
+				current = nextCharacter();
+			} else if(current == '\''){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current != '\n'){
+					tokenValue += current;
+				}
+				current = nextCharacter();
+				if(current == '\''){
+					tokenValue += current;
+					currentColumn++;
+				}
+			} else if(current == '<' || current == '>' || current == '+' || current == '=' ){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == '='){
+					tokenValue += current;
+					currentColumn++;
+				}
+			} else if(current == '#'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == ','){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '('){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == ')'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '['){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == ']'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '{'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '}'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '!'){
+				tokenValue += current;
+				currentColumn++;
+			} else {
+				tokenValue += current;
+				currentColumn++;
+			}
+		}
+		tokenValue = (tokenValue.replace(" ", ""));
+
+		token = new Token(tokenValue, tokenLine, tokenCol,analizeTokenCategory(tokenValue));
+		
+		return token;
+	}
+
+	private Character nextCharacter(){
+		currentColumn++;
+		if(currentColumn < line.length()) return line.charAt(currentColumn);
+		else return '\n';
+	}
 	private TokenCategory analizeTokenCategory(String tokenValue) {
 		if(LexemeTable.palavrasReservadas.containsKey(tokenValue)) return LexemeTable.palavrasReservadas.get(tokenValue);
 		else if(LexemeTable.separadores.containsKey(tokenValue)) return LexemeTable.separadores.get(tokenValue);

@@ -7,7 +7,7 @@ public class Token {
 	private int tokenColumn;
 	private String value;
 	
-	public Token(TokenCategory category, int tokenLine, int tokenColumn, String value) {
+	public Token(String value, int tokenLine, int tokenColumn, TokenCategory category) {
 		this.setCategory(category);
 		this.setTokenLine(tokenLine);
 		this.setTokenColumn(tokenColumn);
