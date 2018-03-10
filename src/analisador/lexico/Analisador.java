@@ -12,7 +12,7 @@ public class Analisador {
 	
 	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
-	private Token nextToken;
+	private Token currentToken;
 	private String currentLineContent, line;
 	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
 	
@@ -174,9 +174,9 @@ public class Analisador {
 			}
 		}
 		tokenValue = (tokenValue.replace(" ", ""));
-
+		previousToken = currentToken;
 		token = new Token(tokenValue, tokenLine, tokenCol,analizeTokenCategory(tokenValue));
-		
+		currentToken = token;
 		return token;
 	}
 
@@ -186,10 +186,20 @@ public class Analisador {
 		else return '\n';
 	}
 	private TokenCategory analizeTokenCategory(String tokenValue) {
-		if(LexemeTable.palavrasReservadas.containsKey(tokenValue)) return LexemeTable.palavrasReservadas.get(tokenValue);
+		if(tokenValue.equals("-") && isUnaryNegative())	return TokenCategory.opUnNeg;
+		else if(LexemeTable.palavrasReservadas.containsKey(tokenValue)) return LexemeTable.palavrasReservadas.get(tokenValue);
 		else if(LexemeTable.separadores.containsKey(tokenValue)) return LexemeTable.separadores.get(tokenValue);
 		else if(LexemeTable.operadores.containsKey(tokenValue)) return LexemeTable.operadores.get(tokenValue);
 		else return isConsOrId(tokenValue);
+	}
+
+	private boolean isUnaryNegative(){
+		int categoryValue = previousToken.getCategory().getValue();
+
+		if(categoryValue >= 21 && categoryValue <= 25) return false;
+		else if(categoryValue == 2) return false;
+
+		return true;
 	}
 	
 	private TokenCategory isConsOrId(String tokenValue) {
