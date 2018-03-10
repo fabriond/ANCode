@@ -11,7 +11,8 @@ public class Analisador {
 	
 	private List<String> codeLines = new ArrayList<String>();
 	private Token nextToken;
-	private int currentLine, currentColumn;
+	private String currentLineContent;
+	private int currentLine = 0, currentColumn = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
 		
@@ -19,26 +20,35 @@ public class Analisador {
 		String codeLine = reader.readLine();
 
 		while (codeLine != null) {
-			System.out.println("-"+codeLine);
 			
 			codeLines.add(codeLine);
 			codeLine = reader.readLine();
+			
 		}
+		System.out.println("Program has "+codeLines.size()+" lines of code\n");
 		reader.close();
 	
 	}
 	
 	public boolean hasNextToken() {
 		
-		while(!codeLines.isEmpty()) {
+		if(!codeLines.isEmpty() && currentLine < codeLines.size()) {
+			currentLineContent = codeLines.get(currentLine);
+			
+			if(currentColumn > currentLineContent.length()) {
+				currentLine++;
+				currentColumn = 0;
+			}
+			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()) {
+				currentLineContent = codeLines.get(currentLine);
+				currentColumn = 0;
+				currentLine++;
+			}
+			System.out.println(currentLine + " < " + codeLines.size());
+			return (currentLine < codeLines.size());
 			
 		}
-		
 		return false;
-		
 	}
-
-	
-	
 	
 }

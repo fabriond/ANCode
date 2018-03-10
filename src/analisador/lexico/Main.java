@@ -15,7 +15,8 @@ public class Main {
 		} catch (IOException e) {
 			System.err.println("IO Exception");
 			e.printStackTrace();
-		} 
+		}
+		analisador.hasNextToken();
 		//implementar teste de ler programa e imprimir token a token
 		
 

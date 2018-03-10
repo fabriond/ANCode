@@ -11,13 +11,13 @@ public class LexemeTable {
 		Map<String, TokenCategory> operadores = new HashMap<String, TokenCategory>();
 		
 		palavrasReservadas.put("main", TokenCategory.main);
-		palavrasReservadas.put("int", TokenCategory.intType);
-		palavrasReservadas.put("float", TokenCategory.floatType);
-		palavrasReservadas.put("char", TokenCategory.charType);
-		palavrasReservadas.put("bool", TokenCategory.boolType);
-		palavrasReservadas.put("string", TokenCategory.stringType);
-		palavrasReservadas.put("array", TokenCategory.arrayType);
-		palavrasReservadas.put("void", TokenCategory.funVoid);
+		palavrasReservadas.put("int:", TokenCategory.intType);
+		palavrasReservadas.put("float:", TokenCategory.floatType);
+		palavrasReservadas.put("char:", TokenCategory.charType);
+		palavrasReservadas.put("bool:", TokenCategory.boolType);
+		palavrasReservadas.put("string:", TokenCategory.stringType);
+		palavrasReservadas.put("array:", TokenCategory.arrayType);
+		palavrasReservadas.put("void:", TokenCategory.funVoid);
 		palavrasReservadas.put("if", TokenCategory.estIf);
 		palavrasReservadas.put("elsif", TokenCategory.estElsif);
 		palavrasReservadas.put("else", TokenCategory.estElse);
@@ -41,6 +41,7 @@ public class LexemeTable {
 		operadores.put("*", TokenCategory.opMult);
 		operadores.put("/", TokenCategory.opMult);
 		operadores.put("^", TokenCategory.opExp);
+		operadores.put("=", TokenCategory.opEq);
 		operadores.put("==", TokenCategory.opRelEq);
 		operadores.put("#", TokenCategory.opRelEq);
 		operadores.put("<", TokenCategory.opRelLtGt);
