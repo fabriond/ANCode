@@ -6,6 +6,7 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String[] args) {
+		System.out.println("'a'".length());
 		Analisador analisador = new Analisador();
 		try {
 			analisador.readFile(args[0]);
@@ -16,7 +17,8 @@ public class Main {
 			System.err.println("IO Exception");
 			e.printStackTrace();
 		}
-		analisador.hasNextToken();		
+		analisador.hasNextToken();
+		//System.out.println(analisador.getCategory(""));
 
 	}
 
