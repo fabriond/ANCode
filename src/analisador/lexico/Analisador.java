@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Analisador {
 	
@@ -49,6 +50,12 @@ public class Analisador {
 			
 		}
 		return false;
+	}
+	
+	public TokenCategory getCategory(String tokenValue) {
+		if(LexemeTable.palavrasReservadas.containsKey(tokenValue)) return LexemeTable.palavrasReservadas.get(tokenValue);
+		//Falta criar as funções de checar se é variável/constante, então por enquanto vai ficar assim
+		else return TokenCategory.arrayBegin;
 	}
 	
 }

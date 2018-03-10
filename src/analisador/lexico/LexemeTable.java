@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LexemeTable {
+	
+	public static Map<String, TokenCategory> palavrasReservadas = new HashMap<String, TokenCategory>();
+	public static Map<String, TokenCategory> separadores = new HashMap<String, TokenCategory>();
+	public static Map<String, TokenCategory> operadores = new HashMap<String, TokenCategory>();
+	
 	static {
-		
-		Map<String, TokenCategory> palavrasReservadas = new HashMap<String, TokenCategory>();
-		Map<String, TokenCategory> separadores = new HashMap<String, TokenCategory>();
-		Map<String, TokenCategory> operadores = new HashMap<String, TokenCategory>();
 		
 		palavrasReservadas.put("main", TokenCategory.main);
 		palavrasReservadas.put("int:", TokenCategory.intType);
@@ -51,4 +52,5 @@ public class LexemeTable {
 		operadores.put("+=", TokenCategory.opConc);
 		
 	}
+
 }
