@@ -6,7 +6,6 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String[] args) {
-		System.out.println("'a'".length());
 		Analisador analisador = new Analisador();
 		try {
 			analisador.readFile(args[0]);
