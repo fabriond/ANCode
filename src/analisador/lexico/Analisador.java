@@ -50,8 +50,8 @@ public class Analisador {
 				//System.out.print(currentLine+" - "+currentLineContent+"\n");
 			}
 			
-			//System.out.println("(" + currentLine + " < " + (codeLines.size()-1) + ") ? ");
-			return (currentLine < codeLines.size()-1);
+			//System.out.println("(" + (currentLine) + " < " + (codeLines.size()) + ") ? ");
+			return (!currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size());
 			
 		}
 		return false;
@@ -163,6 +163,23 @@ public class Analisador {
 				tokenValue += current;
 				currentColumn++;
 			} else if(current == '!'){
+				tokenValue += current;
+				currentColumn++;
+			} else if(current == '&'){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == '&'){
+					tokenValue += current;
+					currentColumn++;
+				}
+			} else if(current == '|'){
+				tokenValue += current;
+				current = nextCharacter();
+				if(current == '|'){
+					tokenValue += current;
+					currentColumn++;
+				}
+			} else if(current == '^'){
 				tokenValue += current;
 				currentColumn++;
 			} else {

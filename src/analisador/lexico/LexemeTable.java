@@ -42,6 +42,7 @@ public class LexemeTable {
 		separadores.put("]", TokenCategory.arrayEnd);
 		separadores.put("(", TokenCategory.paramBegin);
 		separadores.put(")", TokenCategory.paramEnd);
+		separadores.put("", TokenCategory.EOF);
 		
 		operadores.put("+", TokenCategory.opAd);
 		operadores.put("-", TokenCategory.opAd);
@@ -56,6 +57,8 @@ public class LexemeTable {
 		operadores.put("<=", TokenCategory.opRelLtGt);
 		operadores.put(">=", TokenCategory.opRelLtGt);
 		operadores.put("+=", TokenCategory.opConc);
+		operadores.put("&&", TokenCategory.opLogAnd);
+		operadores.put("||", TokenCategory.opLogOr);
 		
 		tokenEndings.add(' ');
 		tokenEndings.add('\t');
