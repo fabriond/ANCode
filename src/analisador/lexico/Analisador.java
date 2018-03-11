@@ -39,20 +39,19 @@ public class Analisador {
 			//System.out.println(currentLineContent.length());
 			//System.out.println(currentLine+" "+currentColumn);
 			if(currentColumn > currentLineContent.length()) {
-				System.out.println("oloko");
 				currentLine++;
 				currentColumn = 0;
+			}
+
+			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()-1) {
+				currentColumn = 0;
+				currentLine++;
+				currentLineContent = codeLines.get(currentLine);
+				//System.out.print(currentLine+" - "+currentLineContent+"\n");
 			}
 			
-			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()) {
-				currentLineContent = codeLines.get(currentLine);
-				currentColumn = 0;
-				currentLine++;
-				System.out.print(currentLine+" - "+currentLineContent+"\n");
-			}
-			//System.out.println(currentLine+" "+currentColumn);
-			//System.out.println("(" + currentLine + " < " + codeLines.size() + ") ? ");
-			return (currentLine < codeLines.size());
+			//System.out.println("(" + currentLine + " < " + (codeLines.size()-1) + ") ? ");
+			return (currentLine < codeLines.size()-1);
 			
 		}
 		return false;
@@ -94,7 +93,6 @@ public class Analisador {
 			}
 		} else {
 			while(!LexemeTable.tokenEndings.contains(current)){
-				System.out.print(current);
 				tokenValue += current;
 				current = nextCharacter();
 				if(current == '\n') break;
