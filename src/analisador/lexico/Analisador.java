@@ -170,7 +170,7 @@ public class Analisador {
 				currentColumn++;
 			}
 		}
-		tokenValue = (tokenValue.replace(" ", ""));
+		tokenValue = tokenValue.trim();
 		previousToken = currentToken;
 		token = new Token(tokenValue, tokenLine, tokenCol,analizeTokenCategory(tokenValue));
 		currentToken = token;

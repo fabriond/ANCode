@@ -29,6 +29,9 @@ public class LexemeTable {
 		palavrasReservadas.put("do", TokenCategory.estDo);
 		palavrasReservadas.put("while", TokenCategory.estWhile);
 		palavrasReservadas.put("fun", TokenCategory.funDef);
+		palavrasReservadas.put("print", TokenCategory.instPrint);
+		palavrasReservadas.put("read", TokenCategory.instRead);
+		palavrasReservadas.put("return", TokenCategory.funReturn);
 		
 		separadores.put(",", TokenCategory.commaSep);
 		separadores.put("!", TokenCategory.loopSep);
