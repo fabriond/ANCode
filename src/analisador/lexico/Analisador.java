@@ -6,14 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Analisador {
 	
 	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
 	private Token currentToken;
-	private String currentLineContent, line;
+	private String currentLineContent;
 	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
@@ -37,16 +36,22 @@ public class Analisador {
 		if(!codeLines.isEmpty() && currentLine < codeLines.size()) {
 			currentLineContent = codeLines.get(currentLine);
 			
+			//System.out.println(currentLineContent.length());
+			//System.out.println(currentLine+" "+currentColumn);
 			if(currentColumn > currentLineContent.length()) {
+				System.out.println("oloko");
 				currentLine++;
 				currentColumn = 0;
 			}
+			
 			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()) {
 				currentLineContent = codeLines.get(currentLine);
 				currentColumn = 0;
 				currentLine++;
+				System.out.print(currentLine+" - "+currentLineContent+"\n");
 			}
-			System.out.println("(" + currentLine + " < " + codeLines.size() + ") ? ");
+			//System.out.println(currentLine+" "+currentColumn);
+			//System.out.println("(" + currentLine + " < " + codeLines.size() + ") ? ");
 			return (currentLine < codeLines.size());
 			
 		}
@@ -57,13 +62,14 @@ public class Analisador {
 		Token token;
 		char current;
 		String tokenValue = "";
-
-		current = line.charAt(currentColumn);
+		current = currentLineContent.charAt(currentColumn);
+		tokenCol = currentColumn;
+		tokenLine = currentLine;
 		while(current == ' ' || current == '\t'){
 			current = nextCharacter();
 			tokenCol++;
 		}
-
+		
 		if(Character.toString(current).matches("\\d")){
 			tokenValue += current;
 			current = nextCharacter();
@@ -80,14 +86,15 @@ public class Analisador {
 				}
 			}
 			if(current != ' '){
-				while(!LexemeTable.separadores.containsKey(current)){
+				while(!LexemeTable.tokenEndings.contains(current)){
 					tokenValue += current;
 					current = nextCharacter();
 					if(current == '\n') break;
 				}
 			}
 		} else {
-			while(!LexemeTable.separadores.containsKey(current)){
+			while(!LexemeTable.tokenEndings.contains(current)){
+				System.out.print(current);
 				tokenValue += current;
 				current = nextCharacter();
 				if(current == '\n') break;
@@ -111,14 +118,6 @@ public class Analisador {
 							break;
 						}
 					}
-				}
-			} else if(current == '/'){
-				tokenValue += current;
-				current = nextCharacter();
-				if(current == ';'){
-					tokenValue += current;
-					currentLine++;
-					currentColumn = 0;
 				}
 			} else if(current == ';'){
 				tokenValue += current;
@@ -182,7 +181,7 @@ public class Analisador {
 
 	private Character nextCharacter(){
 		currentColumn++;
-		if(currentColumn < line.length()) return line.charAt(currentColumn);
+		if(currentColumn < currentLineContent.length()) return currentLineContent.charAt(currentColumn);
 		else return '\n';
 	}
 	private TokenCategory analizeTokenCategory(String tokenValue) {

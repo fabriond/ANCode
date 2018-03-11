@@ -16,8 +16,8 @@ public class Main {
 			System.err.println("IO Exception");
 			e.printStackTrace();
 		}
-		analisador.hasNextToken();
-		//System.out.println(analisador.getCategory(""));
+		while(analisador.hasNextToken()) System.out.println(analisador.nextToken());
+		//System.out.println(Character.toString('t').matches("\\d"));
 
 	}
 

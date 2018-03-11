@@ -1,6 +1,8 @@
 package analisador.lexico;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LexemeTable {
@@ -8,6 +10,7 @@ public class LexemeTable {
 	public static Map<String, TokenCategory> palavrasReservadas = new HashMap<String, TokenCategory>();
 	public static Map<String, TokenCategory> separadores = new HashMap<String, TokenCategory>();
 	public static Map<String, TokenCategory> operadores = new HashMap<String, TokenCategory>();
+	public static List<Character> tokenEndings = new ArrayList<Character>();
 	
 	static {
 		
@@ -50,6 +53,29 @@ public class LexemeTable {
 		operadores.put("<=", TokenCategory.opRelLtGt);
 		operadores.put(">=", TokenCategory.opRelLtGt);
 		operadores.put("+=", TokenCategory.opConc);
+		
+		tokenEndings.add(' ');
+		tokenEndings.add('\t');
+		tokenEndings.add(',');
+		tokenEndings.add(';');
+		tokenEndings.add('+');
+		tokenEndings.add('-');
+		tokenEndings.add('*');
+		tokenEndings.add('\\');
+		tokenEndings.add('/');
+		tokenEndings.add('#');
+		tokenEndings.add('!');
+		tokenEndings.add('<');
+		tokenEndings.add('>');
+		tokenEndings.add('=');
+		tokenEndings.add('(');
+		tokenEndings.add(')');
+		tokenEndings.add('[');
+		tokenEndings.add(']');
+		tokenEndings.add('{');
+		tokenEndings.add('}');
+		tokenEndings.add('\'');
+		tokenEndings.add('"');
 		
 	}
 
