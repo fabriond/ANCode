@@ -208,12 +208,15 @@ public class Analisador {
 	}
 
 	private boolean isUnaryNegative(){
-		int categoryValue = previousToken.getCategory().getValue();
-
-		if(categoryValue >= 21 && categoryValue <= 25) return false;
-		else if(categoryValue == 2) return false;
-
-		return true;
+		if(previousToken != null) {
+			int categoryValue = previousToken.getCategory().getValue();
+	
+			if(categoryValue >= 21 && categoryValue <= 25) return false;
+			else if(categoryValue == 2) return false;
+	
+			return true;
+		}
+		else return true;
 	}
 	
 	private TokenCategory isConsOrId(String tokenValue) {
