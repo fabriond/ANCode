@@ -104,21 +104,21 @@ public class Analisador {
 				tokenValue += current;
 				current = nextCharacter();
 				while(current != '\n'){
-                    tokenValue += current;
-                    current = nextCharacter();
-                    if(current == '"'){
-                    	if(tokenValue.endsWith("\\")) {
-        					//checar se barra deve ser ocultado ou não
-                    		tokenValue = tokenValue.replace("\\", "");
+					tokenValue += current;
+					current = nextCharacter();
+					if(current == '"'){
+						if(tokenValue.endsWith("\\")) {
+							//checar se barra deve ser ocultado ou não
+							tokenValue = tokenValue.replace("\\", "");
 							tokenValue += current;
 							current = nextCharacter();
-						}else {
+						} else {
 							tokenValue += current;
 							currentColumn++;
 							break;
 						}
-                    }
-                }
+					}
+				}
 			} else if(current == ';'){
 				tokenValue += current;
 				current = nextCharacter();
