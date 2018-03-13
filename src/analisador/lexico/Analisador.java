@@ -106,17 +106,15 @@ public class Analisador {
 				while(current != '\n'){
 					tokenValue += current;
 					current = nextCharacter();
+					if(current == '\\') {
+						current = nextCharacter();
+						tokenValue += escapeSequences(current);
+						current = nextCharacter();
+					}
 					if(current == '"'){
-						if(tokenValue.endsWith("\\")) {
-							//checar se barra deve ser ocultado ou não
-							tokenValue = tokenValue.replace("\\", "");
-							tokenValue += current;
-							current = nextCharacter();
-						} else {
 							tokenValue += current;
 							currentColumn++;
 							break;
-						}
 					}
 				}
 			} else if(current == ';'){
@@ -126,11 +124,10 @@ public class Analisador {
 				tokenValue += current;
 				current = nextCharacter();
 				if(current == '\\') {
-					//checar se barra deve ser ocultado ou não
-					tokenValue += current; 
 					current = nextCharacter();
+					tokenValue += escapeSequences(current);
 				}
-				if(current != '\n'){
+				else if(current != '\n'){
 					tokenValue += current;
 				}
 				current = nextCharacter();
@@ -250,8 +247,21 @@ public class Analisador {
 		return TokenCategory.unknown;
 	}
 	
+	private char escapeSequences(char current) {
+		if(current == '"' || current == '\'' || current == '\\') return current;
+		else if(current == 'b') return '\b';
+		else if(current == 't') return '\t';
+		else if(current == 'n') return '\n';
+		else if(current == 'f') return '\f';
+		else if(current == 'r') return '\r';
+		else{
+			errorMessage("Invalid escape sequence(valid ones are \\b \\t \\n \\f \\r \\\" \\' \\\\)", "\\"+current);
+			return Character.MIN_VALUE;
+		}
+	}
+	
 	private void errorMessage(String description, String tokenValue) {
-		System.err.println("Error at: "+(currentLine+1)+":"+(currentColumn+1)+" ~> "+tokenValue+", "+description);
+		System.err.println("Error at: "+(currentLine+1)+":"+(currentColumn)+" ~> "+tokenValue+", "+description);
 		System.exit(1);
 	}
 }

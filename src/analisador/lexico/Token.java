@@ -49,7 +49,8 @@ public class Token {
 	@Override
 	public String toString() {
 		String fmt = "[%03d, %03d] (%04d, %10s) {%s}";
-		return String.format(fmt, tokenLine+1, tokenColumn+1, category.getValue(), category.toString(), "'"+value+"'");
+		return String.format(fmt, tokenLine+1, tokenColumn+1, category.getValue(), category.toString(), value);
+		//checar se é bom colocar ' em volta do valor mesmo(pra char fica estranho)
 	}	
 
 }
