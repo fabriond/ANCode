@@ -13,11 +13,10 @@ public class Main {
 			System.err.println("File not found");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println("IO Exception");
+			System.err.println("IO Exception while reading file");
 			e.printStackTrace();
 		}
 		while(analisador.hasNextToken()) System.out.println(analisador.nextToken());
-		//System.out.println(Character.toString('t').matches("\\d"));
 
 	}
 

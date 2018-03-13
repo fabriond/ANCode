@@ -30,14 +30,15 @@ public class Analisador {
 		reader.close();
 	
 	}
-	
+	/**
+	 * Checks if the code read still has a next token
+	 * @return true if there is a next token, false otherwise
+	 */
 	public boolean hasNextToken() {
 		
 		if(!codeLines.isEmpty() && currentLine < codeLines.size()) {
 			currentLineContent = codeLines.get(currentLine);
 			
-			//System.out.println(currentLineContent.length());
-			//System.out.println(currentLine+" "+currentColumn);
 			if(currentColumn > currentLineContent.length()) {
 				currentLine++;
 				currentColumn = 0;
@@ -56,7 +57,11 @@ public class Analisador {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Reads the next token in the code 
+	 * @return next token in code
+	 */
 	public Token nextToken(){
 		Token token;
 		char current;
@@ -100,13 +105,13 @@ public class Analisador {
 		}
 
 		if(tokenValue == ""){
-			if(current == '"'){
+			if(current == '"'){ //checa se é constante string
 				tokenValue += current;
 				current = nextCharacter();
-				while(current != '\n'){
+				while(current != '\n'){ //lê string até \n ou "
 					tokenValue += current;
 					current = nextCharacter();
-					if(current == '\\') {
+					if(current == '\\') {//lê possíveis caracteres de escape
 						current = nextCharacter();
 						tokenValue += escapeSequences(current);
 						current = nextCharacter();
@@ -117,17 +122,14 @@ public class Analisador {
 							break;
 					}
 				}
-			} else if(current == ';'){
+			} else if(current == '\''){ //checa se é constante char
 				tokenValue += current;
 				current = nextCharacter();
-			} else if(current == '\''){
-				tokenValue += current;
-				current = nextCharacter();
-				if(current == '\\') {
+				if(current == '\\') { //lê possível caracter de escape
 					current = nextCharacter();
 					tokenValue += escapeSequences(current);
 				}
-				else if(current != '\n'){
+				else if(current != '\n'){ //lê caracter caso não seja caracter de escape
 					tokenValue += current;
 				}
 				current = nextCharacter();
@@ -142,6 +144,9 @@ public class Analisador {
 					tokenValue += current;
 					currentColumn++;
 				}
+			} else if(current == ';'){ //daqui pra frente é feita a leitura de símbolos
+				tokenValue += current;
+				current = nextCharacter();
 			} else if(current == '#'){
 				tokenValue += current;
 				currentColumn++;
@@ -191,19 +196,30 @@ public class Analisador {
 				currentColumn++;
 			}
 		}
-		tokenValue = tokenValue.trim();
-		previousToken = currentToken;
-		token = new Token(tokenValue, tokenLine, tokenCol,analizeTokenCategory(tokenValue));
+		tokenValue = tokenValue.trim(); //espaços depois do token são retirados
+		previousToken = currentToken; //usado para diferenciar unário negativo de subtração
+		token = new Token(tokenValue, tokenLine, tokenCol,analyzeTokenCategory(tokenValue));
 		currentToken = token;
 		return token;
 	}
 
+	/**
+	 * Gets next character in line
+	 * @return next character in line
+	 * @return '\n' if at the end of the current line
+	 */
 	private Character nextCharacter(){
 		currentColumn++;
 		if(currentColumn < currentLineContent.length()) return currentLineContent.charAt(currentColumn);
 		else return '\n';
 	}
-	private TokenCategory analizeTokenCategory(String tokenValue) {
+
+	/**
+	 * Returns category of a token, based on its lexical value
+	 * @param tokenValue
+	 * @return Category of given token as TokenCategory
+	 */
+	private TokenCategory analyzeTokenCategory(String tokenValue) {
 		if(tokenValue.equals("-") && isUnaryNegative())	return TokenCategory.opUnNeg;
 		else if(LexemeTable.palavrasReservadas.containsKey(tokenValue)) return LexemeTable.palavrasReservadas.get(tokenValue);
 		else if(LexemeTable.separadores.containsKey(tokenValue)) return LexemeTable.separadores.get(tokenValue);
@@ -211,6 +227,10 @@ public class Analisador {
 		else return isConsOrId(tokenValue);
 	}
 
+	/**
+	 * Checks if token is a unary negative
+	 * @return true if currentToken is unary negative and false if not 
+	 */
 	private boolean isUnaryNegative(){
 		if(previousToken != null) {
 			int categoryValue = previousToken.getCategory().getValue();
@@ -223,6 +243,12 @@ public class Analisador {
 		else return true;
 	}
 	
+	/**
+	 * Gets category of literal constants or ids by their lexical value
+	 * @param tokenValue
+	 * @return token's category, if any constant type or an id
+	 * @returns TokenCategory.unknown if type is not constant or id
+	 */
 	private TokenCategory isConsOrId(String tokenValue) {
 		//int constant
 		if(tokenValue.matches("\\d+")) return TokenCategory.intCons;
@@ -247,6 +273,12 @@ public class Analisador {
 		return TokenCategory.unknown;
 	}
 	
+	/**
+	 * Deals with escape sequences in string and char constants  
+	 * @param current, the current char being read
+	 * @return char that has to be appended to the token's value
+	 * @returns exits program and returns an empty char, if current is not valid
+	 */
 	private char escapeSequences(char current) {
 		if(current == '"' || current == '\'' || current == '\\') return current;
 		else if(current == 'b') return '\b';
@@ -260,6 +292,11 @@ public class Analisador {
 		}
 	}
 	
+	/**
+	 * Prints an error message and exits program
+	 * @param description of the error message
+	 * @param value of the token that called error
+	 */
 	private void errorMessage(String description, String tokenValue) {
 		System.err.println("Error at: "+(currentLine+1)+":"+(currentColumn)+" ~> "+tokenValue+", "+description);
 		System.exit(1);
