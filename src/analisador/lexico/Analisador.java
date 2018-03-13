@@ -40,10 +40,12 @@ public class Analisador {
 			currentLineContent = codeLines.get(currentLine);
 			
 			if(currentColumn > currentLineContent.length()) {
-				currentLine++;
 				currentColumn = 0;
+				currentLine++;
+				currentLineContent = codeLines.get(currentLine);
 			}
-
+			
+			// \\s sgnifica white spaces
 			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()-1) {
 				currentColumn = 0;
 				currentLine++;
@@ -69,6 +71,7 @@ public class Analisador {
 		current = currentLineContent.charAt(currentColumn);
 		tokenCol = currentColumn;
 		tokenLine = currentLine;
+		
 		while(current == ' ' || current == '\t'){
 			current = nextCharacter();
 			tokenCol++;
@@ -81,6 +84,8 @@ public class Analisador {
 				tokenValue += current;
 				current = nextCharacter();
 			}
+			
+			//TODO verificar o 24.
 			if(current == '.'){
 				tokenValue += current;
 				current = nextCharacter();
@@ -89,6 +94,7 @@ public class Analisador {
 					current = nextCharacter();
 				}
 			}
+			
 			if(current != ' '){
 				while(!LexemeTable.tokenEndings.contains(current)){
 					tokenValue += current;
@@ -97,6 +103,7 @@ public class Analisador {
 				}
 			}
 		} else {
+			//Dar uma verificadinha no \n e \t como string e tokenEnding, testar o ponto também
 			while(!LexemeTable.tokenEndings.contains(current)){
 				tokenValue += current;
 				current = nextCharacter();
@@ -108,6 +115,7 @@ public class Analisador {
 			if(current == '"'){ //checa se é constante string
 				tokenValue += current;
 				current = nextCharacter();
+				
 				while(current != '\n'){ //lê string até \n ou "
 					tokenValue += current;
 					current = nextCharacter();

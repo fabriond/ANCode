@@ -62,6 +62,7 @@ public class LexemeTable {
 		tokenEndings.add(' ');
 		tokenEndings.add('\t');
 		tokenEndings.add(',');
+		tokenEndings.add('.');
 		tokenEndings.add(';');
 		tokenEndings.add('+');
 		tokenEndings.add('-');
