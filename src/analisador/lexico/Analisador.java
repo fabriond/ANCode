@@ -12,7 +12,7 @@ public class Analisador {
 	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
 	private Token currentToken;
-	private String currentLineContent;
+	private String currentLineContent, cachedError;
 	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
@@ -35,7 +35,7 @@ public class Analisador {
 	 * @return true if there is a next token, false otherwise
 	 */
 	public boolean hasNextToken() {
-		
+		sendError();
 		if(!codeLines.isEmpty() && currentLine < codeLines.size()) {
 			currentLineContent = codeLines.get(currentLine);
 			
@@ -45,7 +45,7 @@ public class Analisador {
 				currentLineContent = codeLines.get(currentLine);
 			}
 			
-			// \\s sgnifica white spaces
+			// \\s significa whitespace
 			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()-1) {
 				currentColumn = 0;
 				currentLine++;
@@ -84,8 +84,6 @@ public class Analisador {
 				tokenValue += current;
 				current = nextCharacter();
 			}
-			
-			//TODO verificar o 24.
 			if(current == '.'){
 				tokenValue += current;
 				current = nextCharacter();
@@ -94,12 +92,10 @@ public class Analisador {
 					current = nextCharacter();
 				}
 			}
-			
 			if(current != ' '){
 				while(!LexemeTable.tokenEndings.contains(current)){
 					tokenValue += current;
 					current = nextCharacter();
-					if(current == '\n') break;
 				}
 			}
 		} else {
@@ -107,7 +103,6 @@ public class Analisador {
 			while(!LexemeTable.tokenEndings.contains(current)){
 				tokenValue += current;
 				current = nextCharacter();
-				if(current == '\n') break;
 			}
 		}
 
@@ -152,7 +147,7 @@ public class Analisador {
 					tokenValue += current;
 					currentColumn++;
 				}
-			} else if(current == ';'){ //daqui pra frente é feita a leitura de símbolos
+			} /*else if(current == ';'){ //daqui pra frente é feita a leitura de símbolos
 				tokenValue += current;
 				current = nextCharacter();
 			} else if(current == '#'){
@@ -182,23 +177,31 @@ public class Analisador {
 			} else if(current == '!'){
 				tokenValue += current;
 				currentColumn++;
-			} else if(current == '&'){
+			} else if(current == '^'){
+				tokenValue += current;
+				currentColumn++;
+			}*/ 
+			else if(current == '.'){
+				tokenValue += current;
+				current = nextCharacter();
+				while(Character.toString(current).matches("\\d")){
+					tokenValue += current;
+					current = nextCharacter();
+				}
+			}else if(current == '&'){
 				tokenValue += current;
 				current = nextCharacter();
 				if(current == '&'){
 					tokenValue += current;
 					currentColumn++;
-				}
+				} else errorMessage("Missing &", tokenValue);
 			} else if(current == '|'){
 				tokenValue += current;
 				current = nextCharacter();
 				if(current == '|'){
 					tokenValue += current;
 					currentColumn++;
-				}
-			} else if(current == '^'){
-				tokenValue += current;
-				currentColumn++;
+				} else errorMessage("Missing |", tokenValue);
 			} else {
 				tokenValue += current;
 				currentColumn++;
@@ -264,19 +267,25 @@ public class Analisador {
 		else if(tokenValue.matches("(\\d)+\\.(\\d)+")) return TokenCategory.floatCons;
 		//string constant
 		else if(tokenValue.startsWith("\"")) {
-			if(tokenValue.endsWith("\"")) return TokenCategory.stringCons;
+			if(tokenValue.length() > 1 && tokenValue.endsWith("\"")) return TokenCategory.stringCons;
 			else errorMessage("Missing terminating character \"", tokenValue);
 		}
 		//char constant
 		else if(tokenValue.startsWith("\'")) {
-			if(tokenValue.length() > 3 && !tokenValue.contains("\\")) errorMessage("Invalid character", tokenValue);
-			else if(tokenValue.endsWith("\'")) return TokenCategory.charCons;
+			if(tokenValue.length() > 3) errorMessage("Invalid character constant", tokenValue);
+			else if(tokenValue.length() > 1 && tokenValue.endsWith("\'")) return TokenCategory.charCons;
 			else errorMessage("Missing terminating character \'", tokenValue);
 		}
 		//bool constant
 		else if(tokenValue.equals("true") || tokenValue.equals("false")) return TokenCategory.boolCons;
 		//variable id
 		else if(tokenValue.matches("[a-z_A-Z](\\w)*")) return TokenCategory.id;
+		//casos de erro de constantes numéricas e ids
+		else if(tokenValue.matches("\\.\\d+")) errorMessage("Missing number before decimal point", tokenValue);
+		else if(tokenValue.matches("\\d+\\.")) errorMessage("Missing number after decimal point", tokenValue);
+		else if(tokenValue.matches("[a-z_A-Z](.)*")) errorMessage("Id contains invalid characters", tokenValue);
+		else if(tokenValue.matches("[^a-z_A-Z&|](\\w)*")) errorMessage("Invalid id starting character", tokenValue);
+		else if(tokenValue.matches("[^a-z_A-Z&|](.)*")) errorMessage("Invalid id", tokenValue);
 		//unknown type
 		return TokenCategory.unknown;
 	}
@@ -301,12 +310,22 @@ public class Analisador {
 	}
 	
 	/**
-	 * Prints an error message and exits program
+	 * Prints cached error message, if any 
+	 */
+	public void sendError() {
+		if(cachedError != null) System.err.println(cachedError);
+		cachedError = null;
+	}
+	
+	/**
+	 * Creates an error message and caches it in cachedError
 	 * @param description of the error message
 	 * @param value of the token that called error
 	 */
 	private void errorMessage(String description, String tokenValue) {
-		System.err.println("Error at: "+(currentLine+1)+":"+(currentColumn)+" ~> "+tokenValue+", "+description);
-		System.exit(1);
+		String errorFormat = "Error at [%03d, %03d] -> error: %s ~> token: '%s'";
+		cachedError = (String.format(errorFormat, (currentLine+1), (currentColumn), description, tokenValue));
+		//System.err.println("Error at ["+(currentLine+1)+":"+(currentColumn)+"] -> error: "+description+" ~> token: '"+tokenValue+"'");
+		
 	}
 }

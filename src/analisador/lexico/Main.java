@@ -11,10 +11,10 @@ public class Main {
 			analisador.readFile(args[0]);
 		} catch (FileNotFoundException e) {
 			System.err.println("File not found");
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("IO Exception while reading file");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		while(analisador.hasNextToken()) System.out.println(analisador.nextToken());
 

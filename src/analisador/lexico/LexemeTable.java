@@ -29,6 +29,7 @@ public class LexemeTable {
 		palavrasReservadas.put("do", TokenCategory.estDo);
 		palavrasReservadas.put("while", TokenCategory.estWhile);
 		palavrasReservadas.put("fun", TokenCategory.funDef);
+		palavrasReservadas.put("not", TokenCategory.opLogNot);
 		palavrasReservadas.put("print", TokenCategory.instPrint);
 		palavrasReservadas.put("read", TokenCategory.instRead);
 		palavrasReservadas.put("return", TokenCategory.funReturn);
@@ -59,16 +60,21 @@ public class LexemeTable {
 		operadores.put("&&", TokenCategory.opLogAnd);
 		operadores.put("||", TokenCategory.opLogOr);
 		
+		//lista de terminações de tokens utilizada para identificação de ids e constantes numéricas
 		tokenEndings.add(' ');
 		tokenEndings.add('\t');
+		tokenEndings.add('\n');
 		tokenEndings.add(',');
 		tokenEndings.add('.');
 		tokenEndings.add(';');
+		tokenEndings.add('&');
+		tokenEndings.add('|');
 		tokenEndings.add('+');
 		tokenEndings.add('-');
 		tokenEndings.add('*');
 		tokenEndings.add('\\');
 		tokenEndings.add('/');
+		tokenEndings.add('^');
 		tokenEndings.add('#');
 		tokenEndings.add('!');
 		tokenEndings.add('<');
