@@ -14,7 +14,7 @@ public class Lexic {
 	private Token currentToken;
 	private String currentLineContent;
 	private Error cachedError;//serve pra imprimir erros após a impressão do token que deu erro
-	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
+	private int currentLine = 0, currentColumn = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
 		
@@ -71,8 +71,8 @@ public class Lexic {
 		char current;
 		String tokenValue = "";
 		current = currentLineContent.charAt(currentColumn);
-		tokenCol = currentColumn;
-		tokenLine = currentLine;
+		int tokenCol = currentColumn;
+		int tokenLine = currentLine;
 		while(current == ' ' || current == '\t'){
 			current = nextCharacter();
 			tokenCol++;
