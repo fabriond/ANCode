@@ -11,7 +11,8 @@ public class Token {
 		this.setCategory(category);
 		this.setTokenLine(tokenLine);
 		this.setTokenColumn(tokenColumn);
-		this.setValue(value);
+		if(category == TokenCategory.stringCons || category == TokenCategory.charCons) this.setValue(value.substring(1, value.length()-1));
+		else this.setValue(value);
 	}
 
 	public TokenCategory getCategory() {
@@ -50,7 +51,6 @@ public class Token {
 	public String toString() {
 		String fmt = "[%03d, %03d] (%04d, %10s) {%s}";
 		return String.format(fmt, tokenLine+1, tokenColumn+1, category.getValue(), category.toString(), value);
-		//checar se é bom colocar ' em volta do valor mesmo(pra char fica estranho)
 	}	
 
 }

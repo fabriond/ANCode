@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Analisador {
+public class Lexic {
 	
 	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
 	private Token currentToken;
-	private String currentLineContent, cachedError;
+	private String currentLineContent;
+	private Error cachedError;//serve pra imprimir erros após a impressão do token que deu erro
 	private int currentLine = 0, currentColumn = 0, tokenLine = 0, tokenCol = 0;
 	
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
@@ -30,6 +31,7 @@ public class Analisador {
 		reader.close();
 	
 	}
+	
 	/**
 	 * Checks if the code read still has a next token
 	 * @return true if there is a next token, false otherwise
@@ -71,7 +73,6 @@ public class Analisador {
 		current = currentLineContent.charAt(currentColumn);
 		tokenCol = currentColumn;
 		tokenLine = currentLine;
-		
 		while(current == ' ' || current == '\t'){
 			current = nextCharacter();
 			tokenCol++;
@@ -92,37 +93,30 @@ public class Analisador {
 					current = nextCharacter();
 				}
 			}
-			if(current != ' '){
-				while(!LexemeTable.tokenEndings.contains(current)){
-					tokenValue += current;
-					current = nextCharacter();
-				}
-			}
 		} else {
-			//Dar uma verificadinha no \n e \t como string e tokenEnding, testar o ponto também
 			while(!LexemeTable.tokenEndings.contains(current)){
 				tokenValue += current;
 				current = nextCharacter();
 			}
 		}
-
+		
 		if(tokenValue == ""){
 			if(current == '"'){ //checa se é constante string
 				tokenValue += current;
 				current = nextCharacter();
-				
-				while(current != '\n'){ //lê string até \n ou "
+				if(current == '"'){ //checa se string é vazia
 					tokenValue += current;
-					current = nextCharacter();
-					if(current == '\\') {//lê possíveis caracteres de escape
+					currentColumn++;
+				} else {
+					while(current != '\n'){ //lê string até \n ou "
+						if(current == '\\') current = nextCharacter();
+						tokenValue += current;
 						current = nextCharacter();
-						tokenValue += escapeSequences(current);
-						current = nextCharacter();
-					}
-					if(current == '"'){
-							tokenValue += current;
-							currentColumn++;
-							break;
+						if(current == '"'){
+								tokenValue += current;
+								currentColumn++;
+								break;
+						}
 					}
 				}
 			} else if(current == '\''){ //checa se é constante char
@@ -130,7 +124,7 @@ public class Analisador {
 				current = nextCharacter();
 				if(current == '\\') { //lê possível caracter de escape
 					current = nextCharacter();
-					tokenValue += escapeSequences(current);
+					tokenValue += current;
 				}
 				else if(current != '\n'){ //lê caracter caso não seja caracter de escape
 					tokenValue += current;
@@ -147,41 +141,7 @@ public class Analisador {
 					tokenValue += current;
 					currentColumn++;
 				}
-			} /*else if(current == ';'){ //daqui pra frente é feita a leitura de símbolos
-				tokenValue += current;
-				current = nextCharacter();
-			} else if(current == '#'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == ','){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '('){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == ')'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '['){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == ']'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '{'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '}'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '!'){
-				tokenValue += current;
-				currentColumn++;
-			} else if(current == '^'){
-				tokenValue += current;
-				currentColumn++;
-			}*/ 
-			else if(current == '.'){
+			} else if(current == '.'){
 				tokenValue += current;
 				current = nextCharacter();
 				while(Character.toString(current).matches("\\d")){
@@ -247,7 +207,7 @@ public class Analisador {
 			int categoryValue = previousToken.getCategory().getValue();
 	
 			if(categoryValue >= 21 && categoryValue <= 25) return false;
-			else if(categoryValue == 2) return false;
+			else if(categoryValue == 2 || categoryValue == 17) return false;
 	
 			return true;
 		}
@@ -291,28 +251,9 @@ public class Analisador {
 	}
 	
 	/**
-	 * Deals with escape sequences in string and char constants  
-	 * @param current, the current char being read
-	 * @return char that has to be appended to the token's value
-	 * @returns exits program and returns an empty char, if current is not valid
-	 */
-	private char escapeSequences(char current) {
-		if(current == '"' || current == '\'' || current == '\\') return current;
-		else if(current == 'b') return '\b';
-		else if(current == 't') return '\t';
-		else if(current == 'n') return '\n';
-		else if(current == 'f') return '\f';
-		else if(current == 'r') return '\r';
-		else{
-			errorMessage("Invalid escape sequence(valid ones are \\b \\t \\n \\f \\r \\\" \\' \\\\)", "\\"+current);
-			return Character.MIN_VALUE;
-		}
-	}
-	
-	/**
 	 * Prints cached error message, if any 
 	 */
-	public void sendError() {
+	private void sendError() {
 		if(cachedError != null) System.err.println(cachedError);
 		cachedError = null;
 	}
@@ -323,9 +264,9 @@ public class Analisador {
 	 * @param value of the token that called error
 	 */
 	private void errorMessage(String description, String tokenValue) {
-		String errorFormat = "Error at [%03d, %03d] -> error: %s ~> token: '%s'";
-		cachedError = (String.format(errorFormat, (currentLine+1), (currentColumn), description, tokenValue));
-		//System.err.println("Error at ["+(currentLine+1)+":"+(currentColumn)+"] -> error: "+description+" ~> token: '"+tokenValue+"'");
-		
+		cachedError = new Error(description, currentLine+1, currentColumn, tokenValue);
+		//String errorFormat = "Error at [%03d, %03d] -> error: %s ~> token: '%s'";
+		//cachedError = (String.format(errorFormat, (currentLine+1), (currentColumn+1), description, tokenValue));
+		//System.err.println("Error at ["+(currentLine+1)+":"+(currentColumn+1)+"] -> error: "+description+" ~> token: '"+tokenValue+"'");
 	}
 }

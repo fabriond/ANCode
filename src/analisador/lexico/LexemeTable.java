@@ -15,6 +15,7 @@ public class LexemeTable {
 	static {
 		
 		palavrasReservadas.put("main", TokenCategory.main);
+		palavrasReservadas.put("fun", TokenCategory.funDef);
 		palavrasReservadas.put("int:", TokenCategory.intType);
 		palavrasReservadas.put("float:", TokenCategory.floatType);
 		palavrasReservadas.put("char:", TokenCategory.charType);
@@ -25,10 +26,9 @@ public class LexemeTable {
 		palavrasReservadas.put("if", TokenCategory.estIf);
 		palavrasReservadas.put("elsif", TokenCategory.estElsif);
 		palavrasReservadas.put("else", TokenCategory.estElse);
-		palavrasReservadas.put("loop", TokenCategory.estLoop);
 		palavrasReservadas.put("do", TokenCategory.estDo);
 		palavrasReservadas.put("while", TokenCategory.estWhile);
-		palavrasReservadas.put("fun", TokenCategory.funDef);
+		palavrasReservadas.put("loop", TokenCategory.estLoop);
 		palavrasReservadas.put("not", TokenCategory.opLogNot);
 		palavrasReservadas.put("print", TokenCategory.instPrint);
 		palavrasReservadas.put("read", TokenCategory.instRead);
