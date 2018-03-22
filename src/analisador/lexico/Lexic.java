@@ -16,6 +16,12 @@ public class Lexic {
 	private Error cachedError;//serve pra imprimir erros após a impressão do token que deu erro
 	private int currentLine = 0, currentColumn = 0;
 	
+	/**
+	 * Reads a file from the <code>filepath</code> given and saves it to <code>codeLines</code>
+	 * @param filepath, a string that contains the path of the file to be read
+	 * @throws IOException
+	 * @throws FileNotFoundException if <code>filepath</code> is not valid
+	 */
 	public void readFile(String filepath) throws IOException, FileNotFoundException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(filepath));
