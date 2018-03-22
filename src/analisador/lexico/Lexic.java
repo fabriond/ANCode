@@ -25,9 +25,14 @@ public class Lexic {
 			
 			codeLines.add(codeLine);
 			codeLine = reader.readLine();
-			
+
 		}
+		//para dar print apenas os tokens, comentar as linhas a seguir até o próximo comentário
+		System.out.println("Code Read:\n");
+		for(int i = 0; i < codeLines.size(); i++) System.out.println((i+1)+"| "+codeLines.get(i));
+		System.out.println();
 		System.out.println("Program has "+codeLines.size()+" lines of code\n");
+		//comentar do ultimo comentário até aqui para dar print apenas nos tokens
 		reader.close();
 	
 	}

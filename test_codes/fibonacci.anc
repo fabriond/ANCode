@@ -1,0 +1,11 @@
+fun main () void:{
+	int: a = 0, b = 1, i, c = 0, n;
+	read(n);    
+	loop(i = 1 ! i < n ! i = i + 1){
+		c = a + b;
+		a = b;
+		b = c;
+		print("" += c += ", ");    
+	}
+    return 0;
+}
