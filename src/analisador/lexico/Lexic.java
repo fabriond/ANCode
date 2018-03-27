@@ -55,7 +55,11 @@ public class Lexic {
 			if(currentColumn > currentLineContent.length()) {
 				currentColumn = 0;
 				currentLine++;
+				
+				if(currentLine >= codeLines.size()) return false;
+				
 				currentLineContent = codeLines.get(currentLine);
+
 			}
 			
 			// \\s significa whitespace
@@ -111,7 +115,7 @@ public class Lexic {
 			}
 		}
 		
-		if(tokenValue == ""){
+		if(tokenValue.isEmpty()){
 			if(current == '"'){ //checa se é constante string
 				tokenValue += current;
 				current = nextCharacter();
@@ -217,7 +221,7 @@ public class Lexic {
 		if(previousToken != null) {
 			int categoryValue = previousToken.getCategory().getValue();
 	
-			if(categoryValue >= 21 && categoryValue <= 25) return false;
+			if(categoryValue == 21 || categoryValue == 22) return false;
 			else if(categoryValue == 2 || categoryValue == 17) return false;
 	
 			return true;

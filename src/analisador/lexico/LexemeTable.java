@@ -60,7 +60,7 @@ public class LexemeTable {
 		operadores.put("&&", TokenCategory.opLogAnd);
 		operadores.put("||", TokenCategory.opLogOr);
 		
-		//lista de terminações de tokens utilizada para identificação de ids e constantes numéricas
+		//lista de terminações de tokens utilizada para identificação de ids e constantes numericas
 		tokenEndings.add(' ');
 		tokenEndings.add('\t');
 		tokenEndings.add('\n');
@@ -88,7 +88,6 @@ public class LexemeTable {
 		tokenEndings.add('}');
 		tokenEndings.add('\'');
 		tokenEndings.add('"');
-		
 	}
 
 }
