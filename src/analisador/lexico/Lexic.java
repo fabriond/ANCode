@@ -4,77 +4,75 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Lexic {
 	
-	private List<String> codeLines = new ArrayList<String>();
 	private Token previousToken;
 	private Token currentToken;
 	private String currentLineContent;
 	private Error cachedError;//serve pra imprimir erros após a impressão do token que deu erro
 	private int currentLine = 0, currentColumn = 0;
+	private BufferedReader reader;
 	
 	/**
-	 * Reads a file from the <code>filepath</code> given and saves it to <code>codeLines</code>
+	 * Creates an instance of the Lexical analyzer for ANCode,  
+	 * given the <code>filepath</code> of the file that will be compiled 
 	 * @param filepath, a string that contains the path of the file to be read
-	 * @throws IOException
 	 * @throws FileNotFoundException if <code>filepath</code> is not valid
 	 */
-	public void readFile(String filepath) throws IOException, FileNotFoundException{
-		
-		BufferedReader reader = new BufferedReader(new FileReader(filepath));
-		String codeLine = reader.readLine();
-
-		while (codeLine != null) {
-			
-			codeLines.add(codeLine);
-			codeLine = reader.readLine();
-
-		}
-		//para dar print apenas dos tokens, comentar as linhas a seguir até o próximo comentário
-		System.out.println("Code Read:\n");
-		for(int i = 0; i < codeLines.size(); i++) System.out.println((i+1)+"| "+codeLines.get(i));
-		System.out.println();
-		System.out.println("Program has "+codeLines.size()+" lines of code\n");
-		//comentar do ultimo comentário até aqui para dar print apenas dos tokens
-		reader.close();
+	public Lexic(String filepath) throws FileNotFoundException {
+		this.reader = new BufferedReader(new FileReader(filepath));
+	}
 	
+	/**
+	 * Reads the next line from the file given in the constructor
+	 * @return true if the next line has been read successfully, false otherwise
+	 * @throws IOException
+	 */
+	private boolean readNextLine() throws IOException {
+		String codeLine = reader.readLine();
+		if(codeLine != null) {			
+			currentLineContent = codeLine;
+			return true;
+		}
+		else return false;
 	}
 	
 	/**
 	 * Checks if the code read still has a next token
 	 * @return true if there is a next token, false otherwise
+	 * @throws IOException
 	 */
-	public boolean hasNextToken() {
+	public boolean hasNextToken() throws IOException {
 		sendError();
-		if(!codeLines.isEmpty() && currentLine < codeLines.size()) {
-			currentLineContent = codeLines.get(currentLine);
+		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
+			readNextLine();
 			
-			if(currentColumn > currentLineContent.length()) {
-				currentColumn = 0;
-				currentLine++;
-				
-				if(currentLine >= codeLines.size()) return false;
-				
-				currentLineContent = codeLines.get(currentLine);
-
-			}
-			
-			// \\s significa whitespace
-			while(currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size()-1) {
-				currentColumn = 0;
-				currentLine++;
-				currentLineContent = codeLines.get(currentLine);
-				//System.out.print(currentLine+" - "+currentLineContent+"\n");
-			}
-			
-			//System.out.println("(" + (currentLine) + " < " + (codeLines.size()) + ") ? ");
-			return (!currentLineContent.substring(currentColumn).matches("\\s*") && currentLine < codeLines.size());
-			
+			//da print na primeira linha
+			System.out.println("Current Line: ");
+			if(currentLineContent == null) {//caso o arquivo esteja vazio
+				System.out.println((currentLine+1)+"|");
+				return false;//caso o arquivo esteja vazio não há mais tokens
+			} else System.out.println((currentLine+1)+"| "+currentLineContent);
+			System.out.println();
+			//fim do print da primeira linha
 		}
-		return false;
+		
+		if(currentLineContent.substring(currentColumn).matches("\\s*")) {
+			while(readNextLine()) {//itera enquanto não chegar no fim do arquivo
+				currentLine++;
+				currentColumn = 0;
+				
+				//da print na linha atual (exceto a primeira linha, pois ela já é tratada acima)
+				System.out.println("\nCurrent Line: ");
+				System.out.println((currentLine+1)+"| "+currentLineContent+"\n");
+				//print da linha atual termina aqui
+				
+				if(!currentLineContent.matches("\\s*")) return true;	
+			}
+			return false;//não há mais linhas a serem lidas(EOF)
+		} else return true;//caso a linha atual não seja composta apenas de espaços em branco
+		
 	}
 	
 	/**
@@ -219,10 +217,10 @@ public class Lexic {
 	 */
 	private boolean isUnaryNegative(){
 		if(previousToken != null) {
-			int categoryValue = previousToken.getCategory().getValue();
-	
-			if(categoryValue == 21 || categoryValue == 22) return false;
-			else if(categoryValue == 2 || categoryValue == 17) return false;
+			TokenCategory categoryValue = previousToken.getCategory();
+
+			if(categoryValue == TokenCategory.intCons || categoryValue == TokenCategory.floatCons) return false;
+			else if(categoryValue == TokenCategory.id || categoryValue == TokenCategory.paramEnd) return false;
 	
 			return true;
 		}
@@ -232,7 +230,7 @@ public class Lexic {
 	/**
 	 * Gets category of literal constants or ids by their lexical value
 	 * @param tokenValue
-	 * @return token's category, if any constant type or an id
+	 * @return token's category if it is any constant type or an id
 	 * @returns TokenCategory.unknown if type is not constant or id
 	 */
 	private TokenCategory isConsOrId(String tokenValue) {
@@ -280,8 +278,5 @@ public class Lexic {
 	 */
 	private void errorMessage(String description, String tokenValue) {
 		cachedError = new Error(description, currentLine+1, currentColumn, tokenValue);
-		//String errorFormat = "Error at [%03d, %03d] -> error: %s ~> token: '%s'";
-		//cachedError = (String.format(errorFormat, (currentLine+1), (currentColumn+1), description, tokenValue));
-		//System.err.println("Error at ["+(currentLine+1)+":"+(currentColumn+1)+"] -> error: "+description+" ~> token: '"+tokenValue+"'");
 	}
 }

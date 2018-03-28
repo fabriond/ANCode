@@ -6,9 +6,9 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String[] args) {
-		Lexic lexic = new Lexic();
 		try {
-			lexic.readFile(args[0]);
+			Lexic lexic = new Lexic(args[0]);			
+			while(lexic.hasNextToken()) System.out.println(lexic.nextToken());
 		} catch (FileNotFoundException e) {
 			System.err.println("File not found");
 			//e.printStackTrace();
@@ -16,7 +16,6 @@ public class Main {
 			System.err.println("IO Exception while reading file");
 			//e.printStackTrace();
 		}
-		while(lexic.hasNextToken()) System.out.println(lexic.nextToken());
 
 	}
 
