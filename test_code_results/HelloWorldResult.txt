@@ -1,0 +1,23 @@
+Current Line: 
+1| fun main () void:{
+
+[001, 001] (0010,     funDef) {fun}
+[001, 005] (0001,       main) {main}
+[001, 010] (0016, paramBegin) {(}
+[001, 011] (0017,   paramEnd) {)}
+[001, 013] (0009,    funVoid) {void:}
+[001, 018] (0011,   escBegin) {{}
+
+Current Line: 
+2| 	print("Hello World!");    
+
+[002, 002] (0044,  instPrint) {print}
+[002, 007] (0016, paramBegin) {(}
+[002, 008] (0025, stringCons) {Hello World!}
+[002, 022] (0017,   paramEnd) {)}
+[002, 023] (0018,    lineEnd) {;}
+
+Current Line: 
+3| }
+
+[003, 001] (0012,     escEnd) {}}

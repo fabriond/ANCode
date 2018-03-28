@@ -1,0 +1,350 @@
+Current Line: 
+1| fun shellSort(array: vetor(int:, 150), int: size) void:{
+
+[001, 001] (0010,     funDef) {fun}
+[001, 005] (0002,         id) {shellSort}
+[001, 014] (0016, paramBegin) {(}
+[001, 015] (0008,  arrayType) {array:}
+[001, 022] (0002,         id) {vetor}
+[001, 027] (0016, paramBegin) {(}
+[001, 028] (0003,    intType) {int:}
+[001, 032] (0019,   commaSep) {,}
+[001, 034] (0021,    intCons) {150}
+[001, 037] (0017,   paramEnd) {)}
+[001, 038] (0019,   commaSep) {,}
+[001, 040] (0003,    intType) {int:}
+[001, 045] (0002,         id) {size}
+[001, 049] (0017,   paramEnd) {)}
+[001, 051] (0009,    funVoid) {void:}
+[001, 056] (0011,   escBegin) {{}
+
+Current Line: 
+2| 	int: i, j, value, gap = 1;    
+
+[002, 002] (0003,    intType) {int:}
+[002, 007] (0002,         id) {i}
+[002, 008] (0019,   commaSep) {,}
+[002, 010] (0002,         id) {j}
+[002, 011] (0019,   commaSep) {,}
+[002, 013] (0002,         id) {value}
+[002, 018] (0019,   commaSep) {,}
+[002, 020] (0002,         id) {gap}
+[002, 024] (0030,       opEq) {=}
+[002, 026] (0021,    intCons) {1}
+[002, 027] (0018,    lineEnd) {;}
+
+Current Line: 
+3| 	while(gap < size){
+
+[003, 002] (0042,   estWhile) {while}
+[003, 007] (0016, paramBegin) {(}
+[003, 008] (0002,         id) {gap}
+[003, 012] (0033,  opRelLtGt) {<}
+[003, 014] (0002,         id) {size}
+[003, 018] (0017,   paramEnd) {)}
+[003, 019] (0011,   escBegin) {{}
+
+Current Line: 
+4| 		gap = 3 * gap + 1;
+
+[004, 003] (0002,         id) {gap}
+[004, 007] (0030,       opEq) {=}
+[004, 009] (0021,    intCons) {3}
+[004, 011] (0027,     opMult) {*}
+[004, 013] (0002,         id) {gap}
+[004, 017] (0026,       opAd) {+}
+[004, 019] (0021,    intCons) {1}
+[004, 020] (0018,    lineEnd) {;}
+
+Current Line: 
+5| 	}    
+
+[005, 002] (0012,     escEnd) {}}
+
+Current Line: 
+6| 	while(gap > 1){
+
+[006, 002] (0042,   estWhile) {while}
+[006, 007] (0016, paramBegin) {(}
+[006, 008] (0002,         id) {gap}
+[006, 012] (0033,  opRelLtGt) {>}
+[006, 014] (0021,    intCons) {1}
+[006, 015] (0017,   paramEnd) {)}
+[006, 016] (0011,   escBegin) {{}
+
+Current Line: 
+7| 		gap = gap / 3;
+
+[007, 003] (0002,         id) {gap}
+[007, 007] (0030,       opEq) {=}
+[007, 009] (0002,         id) {gap}
+[007, 013] (0027,     opMult) {/}
+[007, 015] (0021,    intCons) {3}
+[007, 016] (0018,    lineEnd) {;}
+
+Current Line: 
+8| 		loop(i = gap ! i < size ! i = i + 1){
+
+[008, 003] (0040,    estLoop) {loop}
+[008, 007] (0016, paramBegin) {(}
+[008, 008] (0002,         id) {i}
+[008, 010] (0030,       opEq) {=}
+[008, 012] (0002,         id) {gap}
+[008, 016] (0020,    loopSep) {!}
+[008, 018] (0002,         id) {i}
+[008, 020] (0033,  opRelLtGt) {<}
+[008, 022] (0002,         id) {size}
+[008, 027] (0020,    loopSep) {!}
+[008, 029] (0002,         id) {i}
+[008, 031] (0030,       opEq) {=}
+[008, 033] (0002,         id) {i}
+[008, 035] (0026,       opAd) {+}
+[008, 037] (0021,    intCons) {1}
+[008, 038] (0017,   paramEnd) {)}
+[008, 039] (0011,   escBegin) {{}
+
+Current Line: 
+9| 			value = vetor[i];
+
+[009, 004] (0002,         id) {value}
+[009, 010] (0030,       opEq) {=}
+[009, 012] (0002,         id) {vetor}
+[009, 017] (0013, arrayBegin) {[}
+[009, 018] (0002,         id) {i}
+[009, 019] (0014,   arrayEnd) {]}
+[009, 020] (0018,    lineEnd) {;}
+
+Current Line: 
+10| 			j = i - gap;    
+
+[010, 004] (0002,         id) {j}
+[010, 006] (0030,       opEq) {=}
+[010, 008] (0002,         id) {i}
+[010, 010] (0026,       opAd) {-}
+[010, 012] (0002,         id) {gap}
+[010, 015] (0018,    lineEnd) {;}
+
+Current Line: 
+11| 			while(j >= 0 && value < vetor[j]){
+
+[011, 004] (0042,   estWhile) {while}
+[011, 009] (0016, paramBegin) {(}
+[011, 010] (0002,         id) {j}
+[011, 012] (0033,  opRelLtGt) {>=}
+[011, 015] (0021,    intCons) {0}
+[011, 017] (0034,   opLogAnd) {&&}
+[011, 020] (0002,         id) {value}
+[011, 026] (0033,  opRelLtGt) {<}
+[011, 028] (0002,         id) {vetor}
+[011, 033] (0013, arrayBegin) {[}
+[011, 034] (0002,         id) {j}
+[011, 035] (0014,   arrayEnd) {]}
+[011, 036] (0017,   paramEnd) {)}
+[011, 037] (0011,   escBegin) {{}
+
+Current Line: 
+12| 				vetor[j + gap] = vetor[j];
+
+[012, 005] (0002,         id) {vetor}
+[012, 010] (0013, arrayBegin) {[}
+[012, 011] (0002,         id) {j}
+[012, 013] (0026,       opAd) {+}
+[012, 015] (0002,         id) {gap}
+[012, 018] (0014,   arrayEnd) {]}
+[012, 020] (0030,       opEq) {=}
+[012, 022] (0002,         id) {vetor}
+[012, 027] (0013, arrayBegin) {[}
+[012, 028] (0002,         id) {j}
+[012, 029] (0014,   arrayEnd) {]}
+[012, 030] (0018,    lineEnd) {;}
+
+Current Line: 
+13| 				j = j - gap;    
+
+[013, 005] (0002,         id) {j}
+[013, 007] (0030,       opEq) {=}
+[013, 009] (0002,         id) {j}
+[013, 011] (0026,       opAd) {-}
+[013, 013] (0002,         id) {gap}
+[013, 016] (0018,    lineEnd) {;}
+
+Current Line: 
+14| 			}
+
+[014, 004] (0012,     escEnd) {}}
+
+Current Line: 
+15| 			vetor[j + gap] = value;
+
+[015, 004] (0002,         id) {vetor}
+[015, 009] (0013, arrayBegin) {[}
+[015, 010] (0002,         id) {j}
+[015, 012] (0026,       opAd) {+}
+[015, 014] (0002,         id) {gap}
+[015, 017] (0014,   arrayEnd) {]}
+[015, 019] (0030,       opEq) {=}
+[015, 021] (0002,         id) {value}
+[015, 026] (0018,    lineEnd) {;}
+
+Current Line: 
+16| 		}
+
+[016, 003] (0012,     escEnd) {}}
+
+Current Line: 
+17| 	}
+
+[017, 002] (0012,     escEnd) {}}
+
+Current Line: 
+18| }
+
+[018, 001] (0012,     escEnd) {}}
+
+Current Line: 
+19| 
+
+
+Current Line: 
+20| fun main() void:{
+
+[020, 001] (0010,     funDef) {fun}
+[020, 005] (0001,       main) {main}
+[020, 009] (0016, paramBegin) {(}
+[020, 010] (0017,   paramEnd) {)}
+[020, 012] (0009,    funVoid) {void:}
+[020, 017] (0011,   escBegin) {{}
+
+Current Line: 
+21| 	int: n, i;
+
+[021, 002] (0003,    intType) {int:}
+[021, 007] (0002,         id) {n}
+[021, 008] (0019,   commaSep) {,}
+[021, 010] (0002,         id) {i}
+[021, 011] (0018,    lineEnd) {;}
+
+Current Line: 
+22| 	read(n);
+
+[022, 002] (0043,   instRead) {read}
+[022, 006] (0016, paramBegin) {(}
+[022, 007] (0002,         id) {n}
+[022, 008] (0017,   paramEnd) {)}
+[022, 009] (0018,    lineEnd) {;}
+
+Current Line: 
+23| 	array: vetor(int:, 150);
+
+[023, 002] (0008,  arrayType) {array:}
+[023, 009] (0002,         id) {vetor}
+[023, 014] (0016, paramBegin) {(}
+[023, 015] (0003,    intType) {int:}
+[023, 019] (0019,   commaSep) {,}
+[023, 021] (0021,    intCons) {150}
+[023, 024] (0017,   paramEnd) {)}
+[023, 025] (0018,    lineEnd) {;}
+
+Current Line: 
+24| 
+
+
+Current Line: 
+25| 	loop(i = 1 ! i <= n ! i = i + 1){
+
+[025, 002] (0040,    estLoop) {loop}
+[025, 006] (0016, paramBegin) {(}
+[025, 007] (0002,         id) {i}
+[025, 009] (0030,       opEq) {=}
+[025, 011] (0021,    intCons) {1}
+[025, 013] (0020,    loopSep) {!}
+[025, 015] (0002,         id) {i}
+[025, 017] (0033,  opRelLtGt) {<=}
+[025, 020] (0002,         id) {n}
+[025, 022] (0020,    loopSep) {!}
+[025, 024] (0002,         id) {i}
+[025, 026] (0030,       opEq) {=}
+[025, 028] (0002,         id) {i}
+[025, 030] (0026,       opAd) {+}
+[025, 032] (0021,    intCons) {1}
+[025, 033] (0017,   paramEnd) {)}
+[025, 034] (0011,   escBegin) {{}
+
+Current Line: 
+26| 		read(vetor[i]);    
+
+[026, 003] (0043,   instRead) {read}
+[026, 007] (0016, paramBegin) {(}
+[026, 008] (0002,         id) {vetor}
+[026, 013] (0013, arrayBegin) {[}
+[026, 014] (0002,         id) {i}
+[026, 015] (0014,   arrayEnd) {]}
+[026, 016] (0017,   paramEnd) {)}
+[026, 017] (0018,    lineEnd) {;}
+
+Current Line: 
+27| 	}
+
+[027, 002] (0012,     escEnd) {}}
+
+Current Line: 
+28| 
+
+
+Current Line: 
+29| 	shellSort(vetor, n);
+
+[029, 002] (0002,         id) {shellSort}
+[029, 011] (0016, paramBegin) {(}
+[029, 012] (0002,         id) {vetor}
+[029, 017] (0019,   commaSep) {,}
+[029, 019] (0002,         id) {n}
+[029, 020] (0017,   paramEnd) {)}
+[029, 021] (0018,    lineEnd) {;}
+
+Current Line: 
+30| 	loop(i = 1 ! i <= n ! i = i + 1){
+
+[030, 002] (0040,    estLoop) {loop}
+[030, 006] (0016, paramBegin) {(}
+[030, 007] (0002,         id) {i}
+[030, 009] (0030,       opEq) {=}
+[030, 011] (0021,    intCons) {1}
+[030, 013] (0020,    loopSep) {!}
+[030, 015] (0002,         id) {i}
+[030, 017] (0033,  opRelLtGt) {<=}
+[030, 020] (0002,         id) {n}
+[030, 022] (0020,    loopSep) {!}
+[030, 024] (0002,         id) {i}
+[030, 026] (0030,       opEq) {=}
+[030, 028] (0002,         id) {i}
+[030, 030] (0026,       opAd) {+}
+[030, 032] (0021,    intCons) {1}
+[030, 033] (0017,   paramEnd) {)}
+[030, 034] (0011,   escBegin) {{}
+
+Current Line: 
+31| 		print("" += vetor[i] += " ");
+
+[031, 003] (0044,  instPrint) {print}
+[031, 008] (0016, paramBegin) {(}
+[031, 009] (0025, stringCons) {}
+[031, 012] (0031,     opConc) {+=}
+[031, 015] (0002,         id) {vetor}
+[031, 020] (0013, arrayBegin) {[}
+[031, 021] (0002,         id) {i}
+[031, 022] (0014,   arrayEnd) {]}
+[031, 024] (0031,     opConc) {+=}
+[031, 027] (0025, stringCons) { }
+[031, 030] (0017,   paramEnd) {)}
+[031, 031] (0018,    lineEnd) {;}
+
+Current Line: 
+32| 	}
+
+[032, 002] (0012,     escEnd) {}}
+
+Current Line: 
+33| }
+
+[033, 001] (0012,     escEnd) {}}
