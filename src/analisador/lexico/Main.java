@@ -1,7 +1,6 @@
 package analisador.lexico;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import analisador.sintatico.SyntacticAnalyzer;
 
