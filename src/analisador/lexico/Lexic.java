@@ -29,8 +29,13 @@ public class Lexic {
 	 * @return true if the next line has been read successfully, false otherwise
 	 * @throws IOException
 	 */
-	private boolean readNextLine() throws IOException {
-		String codeLine = reader.readLine();
+	private boolean readNextLine() {
+		String codeLine = new String();
+		try {
+			codeLine = reader.readLine();	
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		if(codeLine != null) {			
 			currentLineContent = codeLine;
 			return true;
@@ -43,7 +48,7 @@ public class Lexic {
 	 * @return true if there is a next token, false otherwise
 	 * @throws IOException
 	 */
-	public boolean hasNextToken() throws IOException {
+	public boolean hasNextToken() {
 		sendError();
 		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
 			readNextLine();
@@ -184,6 +189,7 @@ public class Lexic {
 		previousToken = currentToken; //usado para diferenciar unário negativo de subtração
 		token = new Token(tokenValue, tokenLine, tokenCol,analyzeTokenCategory(tokenValue));
 		currentToken = token;
+		System.out.println(token);
 		return token;
 	}
 
