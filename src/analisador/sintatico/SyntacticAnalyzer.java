@@ -497,8 +497,26 @@ public class SyntacticAnalyzer {
 		if(token.getCategory().equals(TokenCategory.id)) {
 			if(lexic.hasNextToken()) token = lexic.nextToken();
 			else Erro();
-			ArrayAccess();
+			Idr();
 		}
+	}
+	
+	public void Idr() {
+		if(token.getCategory().equals(TokenCategory.arrayBegin)) {
+			ArrayAccess();
+		} else FunCall();
+	}
+	
+	public void FunCall() {
+		if(token.getCategory().equals(TokenCategory.paramBegin)) {
+			if(lexic.hasNextToken()) token = lexic.nextToken();
+			else Erro();
+			LEc();
+			if(token.getCategory().equals(TokenCategory.paramEnd)) {
+				if(lexic.hasNextToken()) token = lexic.nextToken();
+				else Erro();
+			} else Erro();
+		} else Erro();
 	}
 	
 	public void ArrayAccess() {
