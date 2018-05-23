@@ -50,15 +50,16 @@ public class Lexic {
 	 */
 	public boolean hasNextToken() {
 		sendError();
+		System.out.println(currentToken);
 		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
 			readNextLine();
 			
 			//da print na primeira linha
 			System.out.println("Current Line: ");
 			if(currentLineContent == null) {//caso o arquivo esteja vazio
-				System.out.println((currentLine+1)+"|");
+				printCodeLine("");
 				return false;//caso o arquivo esteja vazio não há mais tokens
-			} else System.out.println((currentLine+1)+"| "+currentLineContent);
+			} else printCodeLine(currentLineContent);
 			System.out.println();
 			//fim do print da primeira linha
 		}
@@ -70,7 +71,7 @@ public class Lexic {
 				
 				//da print na linha atual (exceto a primeira linha, pois ela já é tratada acima)
 				System.out.println("\nCurrent Line: ");
-				System.out.println((currentLine+1)+"| "+currentLineContent+"\n");
+				printCodeLine(currentLineContent);
 				//print da linha atual termina aqui
 				
 				if(!currentLineContent.matches("\\s*")) return true;	
@@ -78,6 +79,11 @@ public class Lexic {
 			return false;//não há mais linhas a serem lidas(EOF)
 		} else return true;//caso a linha atual não seja composta apenas de espaços em branco
 		
+	}
+	
+	private void printCodeLine(String content) {
+		String format = "%4d  %s";
+		System.out.println(String.format(format, currentLine+1, content+"\n"));
 	}
 	
 	/**
@@ -189,7 +195,7 @@ public class Lexic {
 		previousToken = currentToken; //usado para diferenciar unário negativo de subtração
 		token = new Token(tokenValue, tokenLine, tokenCol,analyzeTokenCategory(tokenValue));
 		currentToken = token;
-		System.out.println(token);
+		//System.out.println(currentToken);
 		return token;
 	}
 
@@ -267,6 +273,10 @@ public class Lexic {
 		else if(tokenValue.matches("[^a-z_A-Z&|](.)*")) errorMessage("Invalid id", tokenValue);
 		//unknown type
 		return TokenCategory.unknown;
+	}
+	
+	public Token getPreviousToken() {
+		return previousToken;
 	}
 	
 	/**
