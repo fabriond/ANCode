@@ -21,8 +21,8 @@ public class Main {
 			System.err.println("File not found");
 			//e.printStackTrace();
 		} catch (Exception e) {
-			System.err.println("IO Exception while reading file");
-			//e.printStackTrace();
+			//System.err.println("IO Exception while reading file");
+			e.printStackTrace();
 		}
 
 	}

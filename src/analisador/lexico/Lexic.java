@@ -52,25 +52,26 @@ public class Lexic {
 		sendError();
 		if(currentToken != null) System.out.println(currentToken);
 		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
+			System.out.println();
 			readNextLine();
 			
 			//da print na primeira linha
-			System.out.println("Current Line: ");
+			//System.out.println("Current Line: ");
 			if(currentLineContent == null) {//caso o arquivo esteja vazio
 				printCodeLine("");
 				return false;//caso o arquivo esteja vazio não há mais tokens
 			} else printCodeLine(currentLineContent);
-			System.out.println();
 			//fim do print da primeira linha
 		}
 		
 		if(currentLineContent.substring(currentColumn).matches("\\s*")) {
 			while(readNextLine()) {//itera enquanto não chegar no fim do arquivo
+				System.out.println();
 				currentLine++;
 				currentColumn = 0;
 				
 				//da print na linha atual (exceto a primeira linha, pois ela já é tratada acima)
-				System.out.println("\nCurrent Line: ");
+				//System.out.println("\nCurrent Line: ");
 				printCodeLine(currentLineContent);
 				//print da linha atual termina aqui
 				
@@ -83,7 +84,7 @@ public class Lexic {
 	
 	private void printCodeLine(String content) {
 		String format = "%4d  %s";
-		System.out.println(String.format(format, currentLine+1, content+"\n"));
+		System.out.println(String.format(format, currentLine+1, content));
 	}
 	
 	/**
