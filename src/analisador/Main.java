@@ -1,8 +1,10 @@
-package analisador.lexico;
+package analisador;
 
 import java.io.FileNotFoundException;
 
-import analisador.sintatico.SyntacticAnalyzer;
+import analisador.lexico.Lexic;
+import analisador.lexico.Token;
+import analisador.sintatico.Syntactic;
 
 public class Main {
 	
@@ -12,7 +14,7 @@ public class Main {
 			//while(lexic.hasNextToken()) System.out.println(lexic.nextToken());
 			if(lexic.hasNextToken()) {
 				Token token = lexic.nextToken();
-				SyntacticAnalyzer synAna = new SyntacticAnalyzer(lexic, token);
+				Syntactic synAna = new Syntactic(lexic, token);
 				synAna.S();
 			}
 		} catch (FileNotFoundException e) {

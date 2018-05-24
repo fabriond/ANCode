@@ -5,11 +5,11 @@ import analisador.lexico.Lexic;
 import analisador.lexico.Token;
 import analisador.lexico.TokenCategory;
 
-public class SyntacticAnalyzer {
+public class Syntactic {
 	Lexic lexic;
 	Token token;
 	
-	public SyntacticAnalyzer(Lexic lexic, Token token) {
+	public Syntactic(Lexic lexic, Token token) {
 		this.lexic = lexic;
 		this.token = token;
 	}
