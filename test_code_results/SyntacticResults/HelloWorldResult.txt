@@ -1,0 +1,36 @@
+Current Line: 
+   1  fun main () void:{
+
+
+S = 'funDef' FunName '(' Param ')' FunType Body S
+[001, 001] (0010,     funDef) {fun}
+FunName = 'main'
+[001, 005] (0001,       main) {main}
+[001, 010] (0016, paramBegin) {(}
+Param = epsilon
+[001, 011] (0017,   paramEnd) {)}
+FunType = 'funVoid'
+[001, 013] (0009,    funVoid) {void:}
+Body = '{' BodyPart '}'
+[001, 018] (0011,   escBegin) {{}
+
+Current Line: 
+   2  	print("Hello World!");    
+
+BodyPart = Structure BodyPart
+Structure = 'instPrint' '(' Ec ')' ';'
+[002, 002] (0044,  instPrint) {print}
+[002, 007] (0016, paramBegin) {(}
+Ec = Fc Ecr
+Fc = 'stringCons'
+[002, 008] (0025, stringCons) {Hello World!}
+Ecr = epsilon
+[002, 022] (0017,   paramEnd) {)}
+[002, 023] (0018,    lineEnd) {;}
+
+Current Line: 
+   3  }
+
+BodyPart = epsilon
+[003, 001] (0012,     escEnd) {}}
+S = epsilon

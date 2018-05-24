@@ -50,7 +50,7 @@ public class Lexic {
 	 */
 	public boolean hasNextToken() {
 		sendError();
-		System.out.println(currentToken);
+		if(currentToken != null) System.out.println(currentToken);
 		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
 			readNextLine();
 			

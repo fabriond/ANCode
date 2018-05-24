@@ -1,0 +1,1195 @@
+Current Line: 
+   1  fun shellSort(array: vetor(int:, 150), int: size) void:{
+
+
+S = 'funDef' FunName '(' Param ')' FunType Body S
+[001, 001] (0010,     funDef) {fun}
+FunName = 'id'
+[001, 005] (0002,         id) {shellSort}
+[001, 014] (0016, paramBegin) {(}
+Param = Type 'id' ArrayOpt Paramr
+Type = 'arrayType'
+[001, 015] (0008,  arrayType) {array:}
+[001, 022] (0002,         id) {vetor}
+ArrayOpt = '(' Type ',' 'intCons' ')'
+[001, 027] (0016, paramBegin) {(}
+Type = 'intType'
+[001, 028] (0003,    intType) {int:}
+[001, 032] (0019,   commaSep) {,}
+[001, 034] (0021,    intCons) {150}
+[001, 037] (0017,   paramEnd) {)}
+Paramr = ',' Type 'id' ArrayOpt Paramr
+[001, 038] (0019,   commaSep) {,}
+Type = 'intType'
+[001, 040] (0003,    intType) {int:}
+[001, 045] (0002,         id) {size}
+ArrayOpt = epsilon
+Paramr = epsilon
+[001, 049] (0017,   paramEnd) {)}
+FunType = 'funVoid'
+[001, 051] (0009,    funVoid) {void:}
+Body = '{' BodyPart '}'
+[001, 056] (0011,   escBegin) {{}
+
+Current Line: 
+   2  	int: i, j, value, gap = 1;    
+
+BodyPart = Decl BodyPart
+Decl = Type LI
+Type = 'intType'
+[002, 002] (0003,    intType) {int:}
+LI = 'id' ArrayOpt Inst LIr
+[002, 007] (0002,         id) {i}
+ArrayOpt = epsilon
+Inst = epsilon
+LIr = ',' 'id' ArrayOpt Inst LIr
+[002, 008] (0019,   commaSep) {,}
+[002, 010] (0002,         id) {j}
+ArrayOpt = epsilon
+Inst = epsilon
+LIr = ',' 'id' ArrayOpt Inst LIr
+[002, 011] (0019,   commaSep) {,}
+[002, 013] (0002,         id) {value}
+ArrayOpt = epsilon
+Inst = epsilon
+LIr = ',' 'id' ArrayOpt Inst LIr
+[002, 018] (0019,   commaSep) {,}
+[002, 020] (0002,         id) {gap}
+ArrayOpt = epsilon
+Inst = 'opEq' Inr
+[002, 024] (0030,       opEq) {=}
+Inr = Ec
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[002, 026] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+LIr = ';'
+[002, 027] (0018,    lineEnd) {;}
+
+Current Line: 
+   3  	while(gap < size){
+
+BodyPart = Structure BodyPart
+Structure = 'estWhile' '(' Eb ')' Body
+[003, 002] (0042,   estWhile) {while}
+[003, 007] (0016, paramBegin) {(}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[003, 008] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[003, 012] (0033,  opRelLtGt) {<}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[003, 014] (0002,         id) {size}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[003, 018] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[003, 019] (0011,   escBegin) {{}
+
+Current Line: 
+   4  		gap = 3 * gap + 1;
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[004, 003] (0002,         id) {gap}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[004, 007] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[004, 009] (0021,    intCons) {3}
+Par = epsilon
+Tar = 'opMult' Pa Tar
+[004, 011] (0027,     opMult) {*}
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[004, 013] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[004, 017] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[004, 019] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[004, 020] (0018,    lineEnd) {;}
+
+Current Line: 
+   5  	}    
+
+BodyPart = epsilon
+[005, 002] (0012,     escEnd) {}}
+
+Current Line: 
+   6  	while(gap > 1){
+
+BodyPart = Structure BodyPart
+Structure = 'estWhile' '(' Eb ')' Body
+[006, 002] (0042,   estWhile) {while}
+[006, 007] (0016, paramBegin) {(}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[006, 008] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[006, 012] (0033,  opRelLtGt) {>}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[006, 014] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[006, 015] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[006, 016] (0011,   escBegin) {{}
+
+Current Line: 
+   7  		gap = gap / 3;
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[007, 003] (0002,         id) {gap}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[007, 007] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[007, 009] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = 'opMult' Pa Tar
+[007, 013] (0027,     opMult) {/}
+Pa = Fa Par
+Fa = 'intCons'
+[007, 015] (0021,    intCons) {3}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[007, 016] (0018,    lineEnd) {;}
+
+Current Line: 
+   8  		loop(i = gap ! i < size ! i = i + 1){
+
+BodyPart = Structure BodyPart
+Structure = 'estLoop' '(' Atr 'loopSep' Eb 'loopSep' Atr ')' Body
+[008, 003] (0040,    estLoop) {loop}
+[008, 007] (0016, paramBegin) {(}
+Atr = 'id' AtrR
+[008, 008] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[008, 010] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[008, 012] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[008, 016] (0020,    loopSep) {!}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[008, 018] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[008, 020] (0033,  opRelLtGt) {<}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[008, 022] (0002,         id) {size}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[008, 027] (0020,    loopSep) {!}
+Atr = 'id' AtrR
+[008, 029] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[008, 031] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[008, 033] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[008, 035] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[008, 037] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[008, 038] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[008, 039] (0011,   escBegin) {{}
+
+Current Line: 
+   9  			value = vetor[i];
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[009, 004] (0002,         id) {value}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[009, 010] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[009, 012] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = '[' Ea ']'
+[009, 017] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[009, 018] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[009, 019] (0014,   arrayEnd) {]}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[009, 020] (0018,    lineEnd) {;}
+
+Current Line: 
+  10  			j = i - gap;    
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[010, 004] (0002,         id) {j}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[010, 006] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[010, 008] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[010, 010] (0026,       opAd) {-}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[010, 012] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[010, 015] (0018,    lineEnd) {;}
+
+Current Line: 
+  11  			while(j >= 0 && value < vetor[j]){
+
+BodyPart = Structure BodyPart
+Structure = 'estWhile' '(' Eb ')' Body
+[011, 004] (0042,   estWhile) {while}
+[011, 009] (0016, paramBegin) {(}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[011, 010] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[011, 012] (0033,  opRelLtGt) {>=}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[011, 015] (0021,    intCons) {0}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = 'opLogAnd' Fb Tbr
+[011, 017] (0034,   opLogAnd) {&&}
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[011, 020] (0002,         id) {value}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[011, 026] (0033,  opRelLtGt) {<}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[011, 028] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = '[' Ea ']'
+[011, 033] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[011, 034] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[011, 035] (0014,   arrayEnd) {]}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[011, 036] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[011, 037] (0011,   escBegin) {{}
+
+Current Line: 
+  12  				vetor[j + gap] = vetor[j];
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[012, 005] (0002,         id) {vetor}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = '[' Ea ']'
+[012, 010] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[012, 011] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[012, 013] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[012, 015] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[012, 018] (0014,   arrayEnd) {]}
+[012, 020] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[012, 022] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = '[' Ea ']'
+[012, 027] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[012, 028] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[012, 029] (0014,   arrayEnd) {]}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[012, 030] (0018,    lineEnd) {;}
+
+Current Line: 
+  13  				j = j - gap;    
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[013, 005] (0002,         id) {j}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[013, 007] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[013, 009] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[013, 011] (0026,       opAd) {-}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[013, 013] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[013, 016] (0018,    lineEnd) {;}
+
+Current Line: 
+  14  			}
+
+BodyPart = epsilon
+[014, 004] (0012,     escEnd) {}}
+
+Current Line: 
+  15  			vetor[j + gap] = value;
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[015, 004] (0002,         id) {vetor}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = '[' Ea ']'
+[015, 009] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[015, 010] (0002,         id) {j}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[015, 012] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[015, 014] (0002,         id) {gap}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[015, 017] (0014,   arrayEnd) {]}
+[015, 019] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[015, 021] (0002,         id) {value}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[015, 026] (0018,    lineEnd) {;}
+
+Current Line: 
+  16  		}
+
+BodyPart = epsilon
+[016, 003] (0012,     escEnd) {}}
+
+Current Line: 
+  17  	}
+
+BodyPart = epsilon
+[017, 002] (0012,     escEnd) {}}
+
+Current Line: 
+  18  }
+
+BodyPart = epsilon
+[018, 001] (0012,     escEnd) {}}
+
+Current Line: 
+  19  
+
+
+Current Line: 
+  20  fun main() void:{
+
+S = 'funDef' FunName '(' Param ')' FunType Body S
+[020, 001] (0010,     funDef) {fun}
+FunName = 'main'
+[020, 005] (0001,       main) {main}
+[020, 009] (0016, paramBegin) {(}
+Param = epsilon
+[020, 010] (0017,   paramEnd) {)}
+FunType = 'funVoid'
+[020, 012] (0009,    funVoid) {void:}
+Body = '{' BodyPart '}'
+[020, 017] (0011,   escBegin) {{}
+
+Current Line: 
+  21  	int: n, i;
+
+BodyPart = Decl BodyPart
+Decl = Type LI
+Type = 'intType'
+[021, 002] (0003,    intType) {int:}
+LI = 'id' ArrayOpt Inst LIr
+[021, 007] (0002,         id) {n}
+ArrayOpt = epsilon
+Inst = epsilon
+LIr = ',' 'id' ArrayOpt Inst LIr
+[021, 008] (0019,   commaSep) {,}
+[021, 010] (0002,         id) {i}
+ArrayOpt = epsilon
+Inst = epsilon
+LIr = ';'
+[021, 011] (0018,    lineEnd) {;}
+
+Current Line: 
+  22  	read(n);
+
+BodyPart = Structure BodyPart
+Structure = 'instRead' '(' IdL ')' ';'
+[022, 002] (0043,   instRead) {read}
+[022, 006] (0016, paramBegin) {(}
+Id = 'id' Idr
+[022, 007] (0002,         id) {n}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+[022, 008] (0017,   paramEnd) {)}
+[022, 009] (0018,    lineEnd) {;}
+
+Current Line: 
+  23  	array: vetor(int:, 150);
+
+BodyPart = Decl BodyPart
+Decl = Type LI
+Type = 'arrayType'
+[023, 002] (0008,  arrayType) {array:}
+LI = 'id' ArrayOpt Inst LIr
+[023, 009] (0002,         id) {vetor}
+ArrayOpt = '(' Type ',' 'intCons' ')'
+[023, 014] (0016, paramBegin) {(}
+Type = 'intType'
+[023, 015] (0003,    intType) {int:}
+[023, 019] (0019,   commaSep) {,}
+[023, 021] (0021,    intCons) {150}
+[023, 024] (0017,   paramEnd) {)}
+Inst = epsilon
+LIr = ';'
+[023, 025] (0018,    lineEnd) {;}
+
+Current Line: 
+  24  
+
+
+Current Line: 
+  25  	loop(i = 1 ! i <= n ! i = i + 1){
+
+BodyPart = Structure BodyPart
+Structure = 'estLoop' '(' Atr 'loopSep' Eb 'loopSep' Atr ')' Body
+[025, 002] (0040,    estLoop) {loop}
+[025, 006] (0016, paramBegin) {(}
+Atr = 'id' AtrR
+[025, 007] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[025, 009] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[025, 011] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[025, 013] (0020,    loopSep) {!}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[025, 015] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[025, 017] (0033,  opRelLtGt) {<=}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[025, 020] (0002,         id) {n}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[025, 022] (0020,    loopSep) {!}
+Atr = 'id' AtrR
+[025, 024] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[025, 026] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[025, 028] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[025, 030] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[025, 032] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[025, 033] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[025, 034] (0011,   escBegin) {{}
+
+Current Line: 
+  26  		read(vetor[i]);    
+
+BodyPart = Structure BodyPart
+Structure = 'instRead' '(' IdL ')' ';'
+[026, 003] (0043,   instRead) {read}
+[026, 007] (0016, paramBegin) {(}
+Id = 'id' Idr
+[026, 008] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = '[' Ea ']'
+[026, 013] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[026, 014] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[026, 015] (0014,   arrayEnd) {]}
+[026, 016] (0017,   paramEnd) {)}
+[026, 017] (0018,    lineEnd) {;}
+
+Current Line: 
+  27  	}
+
+BodyPart = epsilon
+[027, 002] (0012,     escEnd) {}}
+
+Current Line: 
+  28  
+
+
+Current Line: 
+  29  	shellSort(vetor, n);
+
+BodyPart = Atr ';' BodyPart
+Atr = 'id' AtrR
+[029, 002] (0002,         id) {shellSort}
+AtrR = FunCall
+FunCall = '(' LEc ')'
+[029, 011] (0016, paramBegin) {(}
+LEc = Ec LEcr
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[029, 012] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+LEcr = ',' Ec LEcr
+[029, 017] (0019,   commaSep) {,}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[029, 019] (0002,         id) {n}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+LEcr = epsilon
+[029, 020] (0017,   paramEnd) {)}
+[029, 021] (0018,    lineEnd) {;}
+
+Current Line: 
+  30  	loop(i = 1 ! i <= n ! i = i + 1){
+
+BodyPart = Structure BodyPart
+Structure = 'estLoop' '(' Atr 'loopSep' Eb 'loopSep' Atr ')' Body
+[030, 002] (0040,    estLoop) {loop}
+[030, 006] (0016, paramBegin) {(}
+Atr = 'id' AtrR
+[030, 007] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[030, 009] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[030, 011] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[030, 013] (0020,    loopSep) {!}
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[030, 015] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = 'opRelLtGt' Ra Fbr
+[030, 017] (0033,  opRelLtGt) {<=}
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[030, 020] (0002,         id) {n}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+[030, 022] (0020,    loopSep) {!}
+Atr = 'id' AtrR
+[030, 024] (0002,         id) {i}
+AtrR = ArrayAccess 'opEq' Ec
+ArrayAccess = epsilon
+[030, 026] (0030,       opEq) {=}
+Ec = Fc Ecr
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[030, 028] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = 'opAd' Ta Ear
+[030, 030] (0026,       opAd) {+}
+Ta = Pa Tar
+Pa = Fa Par
+Fa = 'intCons'
+[030, 032] (0021,    intCons) {1}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = epsilon
+[030, 033] (0017,   paramEnd) {)}
+Body = '{' BodyPart '}'
+[030, 034] (0011,   escBegin) {{}
+
+Current Line: 
+  31  		print("" += vetor[i] += " ");
+
+BodyPart = Structure BodyPart
+Structure = 'instPrint' '(' Ec ')' ';'
+[031, 003] (0044,  instPrint) {print}
+[031, 008] (0016, paramBegin) {(}
+Ec = Fc Ecr
+Fc = 'stringCons'
+[031, 009] (0025, stringCons) {}
+Ecr = 'opConc' ConcOpt Fc Ecr
+[031, 012] (0031,     opConc) {+=}
+ConcOpt = epsilon
+Fc = Eb
+Eb = Tb Ebr
+Tb = Fb Tbr
+Fb = Ra Fbr
+Ra = Ea Rar
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[031, 015] (0002,         id) {vetor}
+Idr = ArrayAccess
+ArrayAccess = '[' Ea ']'
+[031, 020] (0013, arrayBegin) {[}
+Ea = Ta Ear
+Ta = Pa Tar
+Pa = Fa Par
+Fa = Id
+Id = 'id' Idr
+[031, 021] (0002,         id) {i}
+Idr = ArrayAccess
+ArrayAccess = epsilon
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+[031, 022] (0014,   arrayEnd) {]}
+Par = epsilon
+Tar = epsilon
+Ear = epsilon
+Rar = epsilon
+Fbr = epsilon
+Tbr = epsilon
+Ebr = epsilon
+Ecr = 'opConc' ConcOpt Fc Ecr
+[031, 024] (0031,     opConc) {+=}
+ConcOpt = epsilon
+Fc = 'stringCons'
+[031, 027] (0025, stringCons) { }
+Ecr = epsilon
+[031, 030] (0017,   paramEnd) {)}
+[031, 031] (0018,    lineEnd) {;}
+
+Current Line: 
+  32  	}
+
+BodyPart = epsilon
+[032, 002] (0012,     escEnd) {}}
+
+Current Line: 
+  33  }
+
+BodyPart = epsilon
+[033, 001] (0012,     escEnd) {}}
+S = epsilon
