@@ -7,5 +7,5 @@ fun main () void:{
 		b = c;
 		print("" += c += ", ");    
 	}
-    return 0;
+	return 0;
 }

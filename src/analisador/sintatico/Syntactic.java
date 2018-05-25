@@ -700,7 +700,7 @@ public class Syntactic {
 	}
 	
 	private void unexpectedToken(String expected) {
-		sendError("Expected " + expected+ " after "+lexic.getPreviousToken()+ " but got "+token);
+		sendError("Expected " +expected+ " after "+lexic.getPreviousToken()+ " but got "+token);
 	}
 	
 	public void printProduction(String left, String right) {

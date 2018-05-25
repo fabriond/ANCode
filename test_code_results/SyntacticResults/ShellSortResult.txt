@@ -28,7 +28,7 @@
           Body = '{' BodyPart '}'
               [001, 056] (0011,   escBegin) {{}
 
-   2  	int: i, j, value, gap = 1;    
+   2  	int: i, j, value, gap = 1;
           BodyPart = Decl BodyPart
           Decl = Type LI
           Type = 'intType'
@@ -164,7 +164,7 @@
           Ecr = epsilon
               [004, 020] (0018,    lineEnd) {;}
 
-   5  	}    
+   5  	}
           BodyPart = epsilon
               [005, 002] (0012,     escEnd) {}}
 
@@ -396,7 +396,7 @@
           Ecr = epsilon
               [009, 020] (0018,    lineEnd) {;}
 
-  10  			j = i - gap;    
+  10  			j = i - gap;
           BodyPart = Atr ';' BodyPart
           Atr = 'id' AtrR
               [010, 004] (0002,         id) {j}
@@ -591,7 +591,7 @@
           Ecr = epsilon
               [012, 030] (0018,    lineEnd) {;}
 
-  13  				j = j - gap;    
+  13  				j = j - gap;
           BodyPart = Atr ';' BodyPart
           Atr = 'id' AtrR
               [013, 005] (0002,         id) {j}
@@ -872,7 +872,7 @@
           Body = '{' BodyPart '}'
               [025, 034] (0011,   escBegin) {{}
 
-  26  		read(vetor[i]);    
+  26  		read(vetor[i]);
           BodyPart = Command BodyPart
           Command = 'instRead' '(' IdL ')' ';'
               [026, 003] (0043,   instRead) {read}
