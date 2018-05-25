@@ -106,15 +106,15 @@
           LIr = ';'
               [002, 032] (0018,    lineEnd) {;}
 
-   3  	read(n);    
+   3  	read(n);
           BodyPart = Command BodyPart
           Command = 'instRead' '(' IdL ')' ';'
               [003, 002] (0043,   instRead) {read}
               [003, 006] (0016, paramBegin) {(}
-          Id = 'id' Idr
+          IdL = 'id' ArrayAccess IdLr
               [003, 007] (0002,         id) {n}
-          Idr = ArrayAccess
           ArrayAccess = epsilon
+          IdLr = epsilon
               [003, 008] (0017,   paramEnd) {)}
               [003, 009] (0018,    lineEnd) {;}
 
@@ -326,7 +326,7 @@
           Ecr = epsilon
               [007, 008] (0018,    lineEnd) {;}
 
-   8  		print("" += c += ", ");    
+   8  		print("" += c += ", ");
           BodyPart = Command BodyPart
           Command = 'instPrint' '(' Ec ')' ';'
               [008, 003] (0044,  instPrint) {print}

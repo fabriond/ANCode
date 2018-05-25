@@ -741,10 +741,10 @@
           Command = 'instRead' '(' IdL ')' ';'
               [022, 002] (0043,   instRead) {read}
               [022, 006] (0016, paramBegin) {(}
-          Id = 'id' Idr
+          IdL = 'id' ArrayAccess IdLr
               [022, 007] (0002,         id) {n}
-          Idr = ArrayAccess
           ArrayAccess = epsilon
+          IdLr = epsilon
               [022, 008] (0017,   paramEnd) {)}
               [022, 009] (0018,    lineEnd) {;}
 
@@ -877,9 +877,8 @@
           Command = 'instRead' '(' IdL ')' ';'
               [026, 003] (0043,   instRead) {read}
               [026, 007] (0016, paramBegin) {(}
-          Id = 'id' Idr
+          IdL = 'id' ArrayAccess IdLr
               [026, 008] (0002,         id) {vetor}
-          Idr = ArrayAccess
           ArrayAccess = '[' Ea ']'
               [026, 013] (0013, arrayBegin) {[}
           Ea = Ta Ear
@@ -894,6 +893,7 @@
           Tar = epsilon
           Ear = epsilon
               [026, 015] (0014,   arrayEnd) {]}
+          IdLr = epsilon
               [026, 016] (0017,   paramEnd) {)}
               [026, 017] (0018,    lineEnd) {;}
 

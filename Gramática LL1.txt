@@ -1,0 +1,122 @@
+S = Decl S
+S = 'funDef' FunName '(' Param ')' FunType Body S
+S = &
+
+function declaration:
+FunName = 'id'
+FunName = 'main'
+Param = Type 'id' ArrayOpt Paramr
+Param = &
+Paramr = ',' Type 'id' ArrayOpt Paramr
+Paramr = &
+Return = 'funReturn' Ec
+FunCall = '(' LEc ')'
+
+variable declaration:
+Decl = Type LI
+LI = 'id' ArrayOpt Inst LIr
+LIr = ',' 'id' ArrayOpt Inst LIr
+LIr = ';'
+
+instiating variables:
+Inst = 'opEq' Inr
+Inst = &
+Inr = ArrayCons
+Inr = Ec
+
+id:
+Id = 'id' Idr
+Idr = ArrayAccess
+Idr = FunCall
+
+array options:
+ArrayOpt = '(' Type ',' 'intCons' ')'
+ArrayOpt = &
+ArrayAccess = '[' Ea ']'
+ArrayAccess = &
+
+array constant:
+ArrayCons = '[' LEc ']'
+
+variable type:
+Type = 'intType'
+Type = 'floatType'
+Type = 'charType'
+Type = 'boolType'
+Type = 'stringType'
+Type = 'arrayType'
+
+function type:
+FunType = 'funVoid'
+FunType = Type
+
+structures:
+Command = 'instPrint' '(' Ec ')' ';'
+Command = 'instRead' '(' IdL ')' ';'
+Command = 'estWhile' '(' Eb ')' Body                               // while
+Command = 'estDo' Body 'estWhile' '(' Eb ')' ';'                   // do-while
+Command = 'estLoop' '(' Atr 'loopSep' Eb 'loopSep' Atr ')' Body    // loop
+Command = 'estIf' '(' Eb ')' Body IFr                              // if
+IFr = 'estElsif' '(' Eb ')' Body IFr                               // elsif
+IFr = 'estElse' Body                                               // else
+
+id list:
+IdL = 'id' ArrayAccess IdLr
+IdLr = ',' 'id' ArrayAccess IdLr
+IdLr = &
+
+concatenation options:
+ConcOpt = '[' 'floatCons' ']'
+ConcOpt = &
+
+body:
+Body = '{' BodyPart '}'
+BodyPart = Decl BodyPart
+BodyPart = Atr ';' BodyPart
+BodyPart = Command BodyPart
+BodyPart = Return ';'
+BodyPart = &
+
+list of expressions:
+LEc = Ec LEcr
+LEcr = ',' Ec LEcr
+LEcr = &
+
+expression:
+Atr = 'id' AtrR
+AtrR = ArrayAccess 'opEq' Ec
+AtrR = FunCall
+Ec = Fc Ecr
+Ecr = 'opConc' ConcOpt Fc Ecr     //concatenação
+Ecr = &
+Fc = 'stringCons'
+Fc = 'charCons'
+Fc = Eb
+Eb = Tb Ebr
+Ebr = 'opLogOr' Tb Ebr    //"ou" lógico
+Ebr = &
+Tb = Fb Tbr
+Tbr = 'opLogAnd' Fb Tbr   //"e" lógico
+Tbr = &
+Fb = 'opLogNot' Fb        //not
+Fb = 'boolCons'
+Fb = Ra Fbr
+Fbr = 'opRelLtGt' Ra Fbr  //maior/menor (igual) que
+Fbr = &
+Ra = Ea Rar
+Rar = 'opRelEq' Ea Rar    //igual/diferente
+Rar = &
+Ea = Ta Ear
+Ear = 'opAd' Ta Ear       //soma/subtração
+Ear = &
+Ta = Pa Tar
+Tar = 'opMult' Pa Tar     //multiplicação/divisão
+Tar = &
+Pa = Fa Par
+Par = 'opExp' Pa          //exponencial
+Par = &
+Fa = '(' Eb ')'
+Fa = 'opUnNeg' Fa         //unário negativo
+Fa = Id
+Fa = 'intCons'
+Fa = 'floatCons'

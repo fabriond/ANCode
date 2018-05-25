@@ -270,7 +270,7 @@ public class Syntactic {
 			if(token.getCategory().equals(TokenCategory.paramBegin)) {
 				setNextToken();
 				
-				Id();
+				IdL();
 				if(token.getCategory().equals(TokenCategory.paramEnd)) {
 					setNextToken();
 					
@@ -285,21 +285,21 @@ public class Syntactic {
 	
 	public void IdL() {
 		if(token.getCategory().equals(TokenCategory.id)) {
-			printProduction("IdL", "Id IdLr");
+			printProduction("IdL", "'id' ArrayAccess IdLr");
 			setNextToken();
-			
+			ArrayAccess();
 			IdLr();
 		} else unexpectedToken("id");
 	}
 	
 	public void IdLr() {
 		if(token.getCategory().equals(TokenCategory.commaSep)) {
-			printProduction("IdLr", "',' Id IdLr");
+			printProduction("IdLr", "',' 'id' ArrayAccess IdLr");
 			setNextToken();
 			
 			if(token.getCategory().equals(TokenCategory.id)) {
 				setNextToken();
-				
+				ArrayAccess();
 				IdLr();
 			} else unexpectedToken("id");
 		} else printProduction("IdLr", "epsilon");

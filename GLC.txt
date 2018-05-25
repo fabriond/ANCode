@@ -5,29 +5,25 @@ S = &
 function declaration:
 FunName = 'id'
 FunName = 'main'
-Param = Type 'id' ArrayOpt Paramr
+Param = Param ',' Type 'id' ArrayOpt
+Param = Type 'id' ArrayOpt
 Param = &
-Paramr = ',' Type 'id' ArrayOpt Paramr
-Paramr = &
 Return = 'funReturn' Ec
 FunCall = '(' LEc ')'
 
 variable declaration:
 Decl = Type LI
-LI = 'id' ArrayOpt Inst LIr
-LIr = ',' 'id' ArrayOpt Inst LIr
-LIr = ';'
+LI = LI ',' 'id' ArrayOpt Inst ';'
+LI = 'id' ArrayOpt Inst
 
 instiating variables:
-Inst = 'opEq' Inr
+Inst = 'opEq' ArrayCons
+Inst = 'opEq' Ec
 Inst = &
-Inr = ArrayCons
-Inr = Ec
 
 id:
-Id = 'id' Idr
-Idr = ArrayAccess
-Idr = FunCall
+Id = 'id' ArrayAccess
+Id = 'id' FunCall
 
 array options:
 ArrayOpt = '(' Type ',' 'intCons' ')'
@@ -61,9 +57,8 @@ IFr = 'estElsif' '(' Eb ')' Body IFr                               // elsif
 IFr = 'estElse' Body                                               // else
 
 id list:
-IdL = Id IdLr
-IdLr = ',' Id IdLr
-IdLr = &
+IdL = IdL ',' 'id' ArrayAccess
+IdL = 'id' ArrayAccess
 
 concatenation options:
 ConcOpt = '[' 'floatCons' ']'
@@ -78,45 +73,35 @@ BodyPart = Return ';'
 BodyPart = &
 
 list of expressions:
-LEc = Ec LEcr
-LEcr = ',' Ec LEcr
-LEcr = &
+LEc = LEc ',' Ec 
+LEc = Ec
 
 expression:
-Atr = 'id' AtrR
-AtrR = ArrayAccess 'opEq' Ec
-AtrR = FunCall
-Ec = Fc Ecr
-Ecr = 'opConc' ConcOpt Fc Ecr     //concatenaÁ„o
-Ecr = &
+Atr = 'id' ArrayAccess 'opEq' Ec
+Atr = 'id' FunCall
+Ec = Ec 'opConc' ConcOpt Fc     //concatena√ß√£o
+Ec = Fc
 Fc = 'stringCons'
 Fc = 'charCons'
 Fc = Eb
-Eb = Tb Ebr
-Ebr = 'opLogOr' Tb Ebr    //"ou" lÛgico
-Ebr = &
-Tb = Fb Tbr
-Tbr = 'opLogAnd' Fb Tbr   //"e" lÛgico
-Tbr = &
-Fb = 'opLogNot' Fb        //not
+Eb = Eb 'opLogOr' Tb    //"ou" l√≥gico
+Eb = Tb
+Tb = Tb 'opLogAnd' Fb   //"e" l√≥gico
+Tb = Fb
+Fb = Fb 'opRelLtGt' Ra  //maior/menor (igual) que
+Fb = 'opLogNot' Fb      //not
 Fb = 'boolCons'
-Fb = Ra Fbr
-Fbr = 'opRelLtGt' Ra Fbr  //maior/menor (igual) que
-Fbr = &
-Ra = Ea Rar
-Rar = 'opRelEq' Ea Rar    //igual/diferente
-Rar = &
-Ea = Ta Ear
-Ear = 'opAd' Ta Ear       //soma/subtraÁ„o
-Ear = &
-Ta = Pa Tar
-Tar = 'opMult' Pa Tar     //multiplicaÁ„o/divis„o
-Tar = &
-Pa = Fa Par
-Par = 'opExp' Pa          //exponencial
-Par = &
+Fb = Ra
+Ra = Ra 'opRelEq' Ea    //igual/diferente
+Ra = Ea
+Ea = Ea 'opAd' Ta       //soma/subtra√ß√£o
+Ea = Ta
+Ta = Ta 'opMult' Pa     //multiplica√ß√£o/divis√£o
+Ta = Pa
+Pa = Fa 'opExp' Pa      //exponencial
+Pa = Fa
 Fa = '(' Eb ')'
-Fa = 'opUnNeg' Fa         //un·rio negativo
+Fa = 'opUnNeg' Fa       //un√°rio negativo
 Fa = Id
 Fa = 'intCons'
 Fa = 'floatCons'
