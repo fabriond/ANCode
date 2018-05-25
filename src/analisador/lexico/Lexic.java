@@ -49,10 +49,9 @@ public class Lexic {
 	 * @throws IOException
 	 */
 	public boolean hasNextToken() {
+		if(currentToken != null) System.out.println(String.format("%14s", currentToken));
 		sendError();
-		if(currentToken != null) System.out.println(currentToken);
 		if(currentLine == 0 && currentColumn == 0) {//lê a primeira linha de código
-			System.out.println();
 			readNextLine();
 			
 			//da print na primeira linha

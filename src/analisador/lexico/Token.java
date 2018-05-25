@@ -49,8 +49,8 @@ public class Token {
 	
 	@Override
 	public String toString() {
-		String fmt = "%14s [%03d, %03d] (%04d, %10s) {%s}";
-		return String.format(fmt, "", tokenLine+1, tokenColumn+1, category.ordinal(), category.toString(), value);
+		String fmt = "[%03d, %03d] (%04d, %10s) {%s}";
+		return String.format(fmt, tokenLine+1, tokenColumn+1, category.ordinal(), category.toString(), value);
 	}	
 
 }
