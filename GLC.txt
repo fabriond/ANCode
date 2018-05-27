@@ -46,7 +46,7 @@ function type:
 FunType = 'funVoid'
 FunType = Type
 
-structures:
+commands:
 Command = 'instPrint' '(' Ec ')' ';'
 Command = 'instRead' '(' IdL ')' ';'
 Command = 'estWhile' '(' Eb ')' Body                               // while
