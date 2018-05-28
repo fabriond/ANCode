@@ -8,7 +8,7 @@ import analisador.lexico.TokenCategory;
 public class Syntactic {
 	private Lexic lexic;
 	private Token token;
-	private int scopeCounter;
+	private int scopeCounter = 0;
 	
 	public Syntactic(Lexic lexic, Token token) {
 		this.lexic = lexic;
