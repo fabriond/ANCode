@@ -244,6 +244,8 @@ public class Syntactic {
 				
 				Eb();
 				if(token.getCategory().equals(TokenCategory.paramEnd)) {
+					setNextToken();
+					
 					Body();
 					IFr();
 				} else unexpectedToken(")");
