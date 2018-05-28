@@ -6,8 +6,9 @@ import analisador.lexico.Token;
 import analisador.lexico.TokenCategory;
 
 public class Syntactic {
-	Lexic lexic;
-	Token token;
+	private Lexic lexic;
+	private Token token;
+	private int scopeCounter;
 	
 	public Syntactic(Lexic lexic, Token token) {
 		this.lexic = lexic;
@@ -119,10 +120,11 @@ public class Syntactic {
 		if(token.getCategory().equals(TokenCategory.escBegin)) {
 			printProduction("Body", "'{' BodyPart '}'");
 			setNextToken();
-			
+			scopeCounter++;
 			BodyPart();
 			if(token.getCategory().equals(TokenCategory.escEnd)) {
-				if(lexic.hasNextToken()) token = lexic.nextToken();
+				scopeCounter--;
+				setTokenAndCheckScope();
 			} else unexpectedToken("}");
 		} else unexpectedToken("{");
 	}
@@ -690,13 +692,21 @@ public class Syntactic {
 			} else unexpectedToken("id");
 		} else if(token.getCategory().equals(TokenCategory.lineEnd)) {
 			printProduction("LIr", "';'");
-			setNextToken();
+			setTokenAndCheckScope();
 		}
 	}
 	
 	private void setNextToken() {
 		if(lexic.hasNextToken()) token = lexic.nextToken();
 		else sendError("Unexpected end of file");
+	}
+	
+	private void setTokenAndCheckScope() {
+		if(scopeCounter > 0) {
+			setNextToken();
+		} else {
+			if(lexic.hasNextToken()) token = lexic.nextToken();
+		}
 	}
 	
 	private void unexpectedToken(String expected) {
