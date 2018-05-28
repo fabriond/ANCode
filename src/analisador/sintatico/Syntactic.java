@@ -42,7 +42,9 @@ public class Syntactic {
 					S();
 				} else unexpectedToken(")");
 			} else unexpectedToken("(");
-		} else printProduction("S", "epsilon");
+		} else if(!lexic.hasNextToken()) {
+			printProduction("S", "epsilon");
+		} else unexpectedToken("function or variable declaration");
 	}
 	
 	public void FunName() {
@@ -712,7 +714,10 @@ public class Syntactic {
 	}
 	
 	private void unexpectedToken(String expected) {
-		sendError("Expected " +expected+ " after "+lexic.getPreviousToken()+ " but got "+token);
+		if(lexic.getPreviousToken() != null)
+			sendError("Expected " +expected+ " after "+lexic.getPreviousToken()+ " but got "+token);
+		else
+			sendError("Expected " +expected+ " at beginning of file but got "+token);
 	}
 	
 	public void printProduction(String left, String right) {
